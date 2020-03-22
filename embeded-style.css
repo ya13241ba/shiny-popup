@@ -1,0 +1,142 @@
+
+div#shipop-out {
+	/* overflow-y: hidden; */
+	overflow-y: scroll;
+	font-size: 10px;
+	text-align: left;
+	left :0px;
+	right: 0px;
+	position: absolute;
+	height: 360px;
+	padding: 3px;
+	border: 1px solid #AAA;
+	z-index: 0;
+	background: white;
+	padding-bottom: 5px;
+}
+
+div#shipop-out:hover {
+	z-index: 2;
+}
+
+ul#shipopul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #555;
+	height:20px;
+}
+
+body {
+	font-family: 'Titillium Web', sans-serif;
+	font-size: 10px;
+}
+
+li.shipopli {
+	float: left;
+	margin: 0;
+	padding: 0px;
+	border: 1px solid #AAA;
+}
+
+li.shipopli::before{
+	display: none;
+}
+
+li.shipopli span {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 3px 15px;
+	text-decoration: none;
+}
+
+li.shipopli span:hover:not(.active) {
+	background-color: #111;
+}
+
+li.shipopli span.shipop-tab-selected {
+    background-color: #111;
+}
+
+li.shipopli span.active {
+	background-color: #4CAF50;
+}
+
+details {
+  margin-bottom: 5px;
+}
+
+div.shipop-content {
+	border: 1px solid #AAA;
+	padding: 2px;
+	height: auto;
+}
+
+div.shipop-iframe {
+	width:100%;
+	height:100%;
+}
+
+/* Tab1 */
+table.shipop-table {
+    min-width:auto;
+    margin:initial;
+}
+table.shipop-table th {
+    text-align: center;
+/*    width:60px; */
+    padding:0;
+    border: gray 1px solid;
+}
+table.shipop-table td {
+    text-align: center;
+/*    width:60px; */
+    padding:0;
+    border: gray 1px solid;
+}
+
+/* Tab2 */
+table#shipop-tab2 th {
+    width:30px;
+}
+table#shipop-tab2 td {
+    width:30px;
+}
+
+/* Tab3 */
+table#shipop-eventparam th {
+    width:30px;
+}
+table#shipop-eventparam td {
+    width:30px;
+}
+
+.shipop-crossframe-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+}
+
+.shipop-crossframes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width:100%;
+  height:480px;
+}
+
+.style_th {
+  font-size:10px;
+}
+.style_td {
+  font-size:10px;
+}
+
+#backframe {
+  width:610px;
+}
+#body {
+  width:550px;
+}

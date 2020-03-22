@@ -1,0 +1,6 @@
+table.shipop-datatable > THEAD > TR > TH {
+  padding: 1px 3px;
+}
+table.shipop-datatable > TBODY > TR > TD {
+  padding: 1px 3px;
+}

@@ -1,0 +1,40 @@
+{
+  "manifest_version": 2,
+  "name": "shinycolors-popup2",
+  "description": "シャニマス拡張",
+  "version": "1.0",
+  "browser_action": {
+  },
+  "content_scripts": [
+   {
+     "matches": ["https://shinycolors.enza.fun/*"],
+     "js": ["js/shipop-main.js"]
+   },
+   {
+     "matches": ["https://wikiwiki.jp/shinycolors/*"],
+     "all_frames": true,
+     "js": ["js/shiwiki-main.js"]
+   }
+  ],
+  "background": {
+    "scripts": ["js/shipop-bg.js"],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "js/jquery.min.js",
+    "DataTables/datatables.min.css",
+    "DataTables/datatables.min.js",
+    "lib/moment.min.js",
+    "embeded-style.css",
+    "shimng-idol.css",
+    "html/shipop-content-1.html",
+    "html/shipop-content-2.html",
+    "html/shipop-content-3.html",
+    "js/embeded-script.js",
+    "js/shiwiki-emb.js"
+  ],
+  "permissions": [
+    "https://shinycolors.enza.fun/*",
+    "tabs"
+  ]
+}
