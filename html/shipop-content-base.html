@@ -1,269 +1,272 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8" />
-<title>SHINYPOPUP -TOP-</title>
-<style></style>
-<link href="../embeded-style.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
-<script type="text/javascript" src="../js/jquery.min.js"></script>
-<script type="text/javascript" src="../js/shimng-main.js"></script>
+	<meta charset="utf-8" />
+	<title>SHINYPOPUP -TOP-</title>
+	<style></style>
+	<link href="../embeded-style.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/shimng-main.js"></script>
 </head>
+
 <body>
-<div class="shipop-iframe" id="shipop-iframe-1">
-  <details id="details-produce" open>
-    <summary style="outline:none;">プロデュース</summary>
-    <div class="shipop-content" id="shipop-content-1">
-      <div style="font-size:14px; line-height:120%;">
-        <span id="name">　</span>
-      </div>
-      <div style="font-size:12px;">
-        <span id="seasonNum">　</span>
-        <span id="remainSeasonWeek">　</span>
-        <span id="seasonRank">　</span>
-        <span id="seasonFan">　</span>
-      </div>
-      <TABLE class="shipop-table" id="shipop-baseinfo">
-      	<TR>
-      		<TH style="width: 50px; background-color:lightpink;">Vo</TH>
-      		<TH style="width: 50px; background-color:lightblue;">Da</TH>
-      		<TH style="width: 50px; background-color:gold;">Vi</TH>
-      		<TH style="width: 50px; background-color:rgb(245, 187, 245)">Me</TH>
-      		<TH style="width: 30px; background-color:lightsalmon;">Sp</TH>
-      		<TH style="width: 50px; background-color:lightgreen;">St</TH>
-      		<TH style="width: 60px; background-color:lightgrey;">ファン</TH>
-      		<TH style="width: 60px; background-color:lightgrey;">テンション</TH>
-      		<TH style="width: 80px; background-color:green;">思い出</TH>
-      	</TR>
-      	<TR>
-      		<TD id="vocal">-</TD>
-      		<TD id="dance">-</TD>
-      		<TD id="visual">-</TD>
-      		<TD id="mental">-</TD>
-      		<TD id="skillPoint">-</TD>
-      		<TD id="stamina">-</TD>
-      		<TD id="fan">-</TD>
-      		<TD id="tension">-</TD>
-      		<TD id="memoryAppeal">-</TD>
-      	</TR>
-      </TABLE>
-    </div>
-  </details>
-</div>
-<div class="shipop-iframe" id="shipop-iframe-2">
-  <details id="details-places" open>
-    <summary style="outline:none;">場所</summary>
-    <TABLE class="shipop-table" id="shipop-tab2">
-    	<TR>
-    		<TH style="background-color:green;"                  >約束</TH>
-    		<TH style="width:120px; background-color:lightgrey;" >場所</TH>
-    		<TH style="background-color:lightgrey;"              >Lv</TH>
-    		<TH style="background-color:lightpink;"              >Vo</TH>
-    		<TH style="background-color:lightblue;"              >Da</TH>
-    		<TH style="background-color:gold;"                   >Vi</TH>
-    		<TH style="background-color:rgb(245, 187, 245)"      >Me</TH>
-    		<TH style="background-color:lightsalmon;"            >Sp</TH>
-    		<TH style="background-color:lightgreen;"             >St</TH>
-    		<TH style="width: 50px; background-color:lightgrey;" >ファン</TH>
-    		<TH style="width: 40px; background-color:lightgrey;" >トラブル</TH>
-    		<TH style="width:150px; background-color:lightgrey;" >サポート</TH>
-    		<TH style="background-color:lightgrey;"              >その他</TH>
-      </TR>
-      <TR>
-    		<TD id="places_isPromised1">-</TD>
-    		<TD id="places_name1">-</TD>
-    		<TD id="places_level1">-</TD>
-    		<TD id="places_vocal1">-</TD>
-    		<TD id="places_dance1">-</TD>
-    		<TD id="places_visual1">-</TD>
-    		<TD id="places_mental1">-</TD>
-    		<TD id="places_skillPoint1">-</TD>
-    		<TD id="places_stamina1">-</TD>
-    		<TD id="places_fan1">-</TD>
-    		<TD id="places_troubleRate1">-</TD>
-    		<TD id="places_supportIdols1">-</TD>
-    		<TD id="places_boostedParams1">-</TD>
-    	</TR>
-    	<TR>
-    		<TD id="places_isPromised2">-</TD>
-    		<TD id="places_name2">-</TD>
-    		<TD id="places_level2">-</TD>
-    		<TD id="places_vocal2">-</TD>
-    		<TD id="places_dance2">-</TD>
-    		<TD id="places_visual2">-</TD>
-    		<TD id="places_mental2">-</TD>
-    		<TD id="places_skillPoint2">-</TD>
-    		<TD id="places_stamina2">-</TD>
-    		<TD id="places_fan2">-</TD>
-    		<TD id="places_troubleRate2">-</TD>
-    		<TD id="places_supportIdols2">-</TD>
-    		<TD id="places_boostedParams2">-</TD>
-    	</TR>
-    	<TR>
-    		<TD id="places_isPromised3">-</TD>
-    		<TD id="places_name3">-</TD>
-    		<TD id="places_level3">-</TD>
-    		<TD id="places_vocal3">-</TD>
-    		<TD id="places_dance3">-</TD>
-    		<TD id="places_visual3">-</TD>
-    		<TD id="places_mental3">-</TD>
-    		<TD id="places_skillPoint3">-</TD>
-    		<TD id="places_stamina3">-</TD>
-    		<TD id="places_fan3">-</TD>
-    		<TD id="places_troubleRate3">-</TD>
-    		<TD id="places_supportIdols3">-</TD>
-    		<TD id="places_boostedParams3">-</TD>
-    	</TR>
-    	<TR>
-    		<TD id="places_isPromised4">-</TD>
-    		<TD id="places_name4">-</TD>
-    		<TD id="places_level4">-</TD>
-    		<TD id="places_vocal4">-</TD>
-    		<TD id="places_dance4">-</TD>
-    		<TD id="places_visual4">-</TD>
-    		<TD id="places_mental4">-</TD>
-    		<TD id="places_skillPoint4">-</TD>
-    		<TD id="places_stamina4">-</TD>
-    		<TD id="places_fan4">-</TD>
-    		<TD id="places_troubleRate4">-</TD>
-    		<TD id="places_supportIdols4">-</TD>
-    		<TD id="places_boostedParams4">-</TD>
-    	</TR>
-    	<TR>
-    		<TD id="places_isPromised5">-</TD>
-    		<TD id="places_name5">-</TD>
-    		<TD id="places_level5">-</TD>
-    		<TD id="places_vocal5">-</TD>
-    		<TD id="places_dance5">-</TD>
-    		<TD id="places_visual5">-</TD>
-    		<TD id="places_mental5">-</TD>
-    		<TD id="places_skillPoint5">-</TD>
-    		<TD id="places_stamina5">-</TD>
-    		<TD id="places_fan5">-</TD>
-    		<TD id="places_troubleRate5">-</TD>
-    		<TD id="places_supportIdols5">-</TD>
-    		<TD id="places_boostedParams5">-</TD>
-    	</TR>
-    	<TR>
-    		<TD id="places_isPromised6">-</TD>
-    		<TD id="places_name6">-</TD>
-    		<TD id="places_level6">-</TD>
-    		<TD id="places_vocal6">-</TD>
-    		<TD id="places_dance6">-</TD>
-    		<TD id="places_visual6">-</TD>
-    		<TD id="places_mental6">-</TD>
-    		<TD id="places_skillPoint6">-</TD>
-    		<TD id="places_stamina6">-</TD>
-    		<TD id="places_fan6">-</TD>
-    		<TD id="places_troubleRate6">-</TD>
-    		<TD id="places_supportIdols6">-</TD>
-    		<TD id="places_boostedParams6">-</TD>
-    	</TR>
-    	<TR>
-    		<TD id="places_isPromised7">-</TD>
-    		<TD id="places_name7">-</TD>
-    		<TD id="places_level7">-</TD>
-    		<TD id="places_vocal7">-</TD>
-    		<TD id="places_dance7">-</TD>
-    		<TD id="places_visual7">-</TD>
-    		<TD id="places_mental7">-</TD>
-    		<TD id="places_skillPoint7">-</TD>
-    		<TD id="places_stamina7">-</TD>
-    		<TD id="places_fan7">-</TD>
-    		<TD id="places_troubleRate7">-</TD>
-    		<TD id="places_supportIdols7">-</TD>
-    		<TD id="places_boostedParams7">-</TD>
-    	</TR>
-    </TABLE>
-  </details>
-  <details>
-    <summary style="outline:none;">サポートアイドル</summary>
-  </details>
-  <details>
-    <summary style="outline:none;">サポートスキル</summary>
-    <TABLE class="shipop-table" id="shipop-spskills">
-    	<TR>
-    		<TH style="background-color:lightgrey; width:60px;">タイプ</TH>
-    		<TH style="background-color:lightgrey; width:60px;">場所</TH>
-    		<TH style="background-color:lightgrey; width:150px;">スキル名</TH>
-    		<TH style="background-color:lightgrey; width:40px;">発動率</TH>
-    		<TH style="background-color:lightgrey; width:30px;">補正</TH>
-    		<TH style="background-color:lightgrey; width:200px;">サポート</TH>
-      </TR>
-      <TR id="shipop-spskills-base" style="display:none;">
-        <TD class="spskills_effect_type">-</TD>
-        <TD class="spskills_place">-</TD>
-    		<TD class="spskills_name">-</TD>
-    		<TD class="spskills_rate">-</TD>
-    		<TD class="spskills_value">-</TD>
-    		<TD class="spskills_chara">-</TD>
-      </TR>
-    </TABLE>
-  </details>
-</div>
-<div class="shipop-iframe" id="shipop-iframe-3">
-  <details>
-  <summary style="outline:none;" open>イベント</summary>
-  <DIV id="event_actionName"> </DIV>
-  <DIV><SPAN id="event_eventCategoryName"></SPAN><SPAN id="event_title"> </SPAN></DIV>
-  <TABLE class="shipop-table" id="shipop-eventparam">
-  	<TR>
-  		<TH style="background-color:lightpink;">Vo</TH>
-  		<TH style="background-color:lightblue;">Da</TH>
-  		<TH style="background-color:gold;">Vi</TH>
-  		<TH style="background-color:rgb(245, 187, 245)">Me</TH>
-  		<TH style="background-color:lightsalmon;">Sp</TH>
-  		<TH style="background-color:lightgreen;">St</TH>
-  		<TH style="background-color:lightgrey; width:50px;">ファン</TH>
-  		<TH style="background-color:lightgrey; width:50px;">テンション</TH>
-  		<TH style="background-color:green; width:40px;">思い出</TH>
-  		<TH style="background-color:lightgrey; width:40px;">友好度</TH>
-  	</TR>
-  	<TR>
-  		<TD id="eventparam_vocal">-</TD>
-  		<TD id="eventparam_dance">-</TD>
-  		<TD id="eventparam_visual">-</TD>
-  		<TD id="eventparam_mental">-</TD>
-  		<TD id="eventparam_skillPoint">-</TD>
-  		<TD id="eventparam_stamina">-</TD>
-  		<TD id="eventparam_fan">-</TD>
-  		<TD id="eventparam_tension">-</TD>
-  		<TD id="eventparam_memoryAppeal">-</TD>
-  		<TD id="eventparam_friendship">-</TD>
-  	</TR>
-  </TABLE>
-  <TABLE class="shipop-table" id="shipop-eventselects">
-  	<TR>
-  		<TH style="background-color:lightgrey; width:70px;">ラベル</TH>
-  		<TH style="background-color:lightgrey; width:80px;">名前</TH>
-  		<TH style="background-color:lightgrey; width:300px;">テキスト</TH>
-  		<TH style="background-color:lightgrey; width:70px;">次ラベル</TH>
-      </TR>
-  </TABLE>
-  </details>
-  <details>
-  <summary style="outline:none;">イベント詳細</summary>
-  <TABLE class="shipop-table" id="shipop-eventtracks">
-  	<TR>
-  		<TH style="background-color:lightgrey; width:70px;">ラベル</TH>
-  		<TH style="background-color:lightgrey; width:80px;">名前</TH>
-  		<TH style="background-color:lightgrey; width:300px;">テキスト</TH>
-  		<TH style="background-color:lightgrey; width:70px;">次ラベル</TH>
-      </TR>
-     	<TR id="shipop-eventtracks-base" style="display:none;">
-          <TD class="eventtracks_label">-</TD>
-          <TD class="eventtracks_speaker">-</TD>
-  		<TD class="eventtracks_text" style="text-align:left;">-</TD>
-  		<TD class="eventtracks_nextlabel">-</TD>
-      </TR>
-  </TABLE>
-  </details>
-</div>
-<details>
-<summary style="outline:none;">WIKIページ</summary>
-<div class="shipop-crossframe-container">
-  <iframe class="shipop-crossframes" id="shipop-crossframe-1" />
-</div>
-</details>
+	<div class="shipop-iframe" id="shipop-iframe-1">
+		<details id="details-produce" open>
+			<summary style="outline:none;">プロデュース</summary>
+			<div class="shipop-content" id="shipop-content-1">
+				<div style="font-size:14px; line-height:120%;">
+					<span id="name">　</span>
+				</div>
+				<div style="font-size:12px;">
+					<span id="seasonNum">　</span>
+					<span id="remainSeasonWeek">　</span>
+					<span id="seasonRank">　</span>
+					<span id="seasonFan">　</span>
+				</div>
+				<TABLE class="shipop-table" id="shipop-baseinfo">
+					<TR>
+						<TH style="width: 50px; background-color:lightpink;">Vo</TH>
+						<TH style="width: 50px; background-color:lightblue;">Da</TH>
+						<TH style="width: 50px; background-color:gold;">Vi</TH>
+						<TH style="width: 50px; background-color:rgb(245, 187, 245)">Me</TH>
+						<TH style="width: 30px; background-color:lightsalmon;">Sp</TH>
+						<TH style="width: 50px; background-color:lightgreen;">St</TH>
+						<TH style="width: 60px; background-color:lightgrey;">ファン</TH>
+						<TH style="width: 60px; background-color:lightgrey;">テンション</TH>
+						<TH style="width: 80px; background-color:green;">思い出</TH>
+					</TR>
+					<TR>
+						<TD id="vocal">-</TD>
+						<TD id="dance">-</TD>
+						<TD id="visual">-</TD>
+						<TD id="mental">-</TD>
+						<TD id="skillPoint">-</TD>
+						<TD id="stamina">-</TD>
+						<TD id="fan">-</TD>
+						<TD id="tension">-</TD>
+						<TD id="memoryAppeal">-</TD>
+					</TR>
+				</TABLE>
+			</div>
+		</details>
+	</div>
+	<div class="shipop-iframe" id="shipop-iframe-2">
+		<details id="details-places" open>
+			<summary style="outline:none;">場所</summary>
+			<TABLE class="shipop-table" id="shipop-tab2">
+				<TR>
+					<TH style="background-color:green;">約束</TH>
+					<TH style="width:120px; background-color:lightgrey;">場所</TH>
+					<TH style="background-color:lightgrey;">Lv</TH>
+					<TH style="background-color:lightpink;">Vo</TH>
+					<TH style="background-color:lightblue;">Da</TH>
+					<TH style="background-color:gold;">Vi</TH>
+					<TH style="background-color:rgb(245, 187, 245)">Me</TH>
+					<TH style="background-color:lightsalmon;">Sp</TH>
+					<TH style="background-color:lightgreen;">St</TH>
+					<TH style="width: 50px; background-color:lightgrey;">ファン</TH>
+					<TH style="width: 40px; background-color:lightgrey;">トラブル</TH>
+					<TH style="width:150px; background-color:lightgrey;">サポート</TH>
+					<TH style="background-color:lightgrey;">その他</TH>
+				</TR>
+				<TR>
+					<TD id="places_isPromised1">-</TD>
+					<TD id="places_name1">-</TD>
+					<TD id="places_level1">-</TD>
+					<TD id="places_vocal1">-</TD>
+					<TD id="places_dance1">-</TD>
+					<TD id="places_visual1">-</TD>
+					<TD id="places_mental1">-</TD>
+					<TD id="places_skillPoint1">-</TD>
+					<TD id="places_stamina1">-</TD>
+					<TD id="places_fan1">-</TD>
+					<TD id="places_troubleRate1">-</TD>
+					<TD id="places_supportIdols1">-</TD>
+					<TD id="places_boostedParams1">-</TD>
+				</TR>
+				<TR>
+					<TD id="places_isPromised2">-</TD>
+					<TD id="places_name2">-</TD>
+					<TD id="places_level2">-</TD>
+					<TD id="places_vocal2">-</TD>
+					<TD id="places_dance2">-</TD>
+					<TD id="places_visual2">-</TD>
+					<TD id="places_mental2">-</TD>
+					<TD id="places_skillPoint2">-</TD>
+					<TD id="places_stamina2">-</TD>
+					<TD id="places_fan2">-</TD>
+					<TD id="places_troubleRate2">-</TD>
+					<TD id="places_supportIdols2">-</TD>
+					<TD id="places_boostedParams2">-</TD>
+				</TR>
+				<TR>
+					<TD id="places_isPromised3">-</TD>
+					<TD id="places_name3">-</TD>
+					<TD id="places_level3">-</TD>
+					<TD id="places_vocal3">-</TD>
+					<TD id="places_dance3">-</TD>
+					<TD id="places_visual3">-</TD>
+					<TD id="places_mental3">-</TD>
+					<TD id="places_skillPoint3">-</TD>
+					<TD id="places_stamina3">-</TD>
+					<TD id="places_fan3">-</TD>
+					<TD id="places_troubleRate3">-</TD>
+					<TD id="places_supportIdols3">-</TD>
+					<TD id="places_boostedParams3">-</TD>
+				</TR>
+				<TR>
+					<TD id="places_isPromised4">-</TD>
+					<TD id="places_name4">-</TD>
+					<TD id="places_level4">-</TD>
+					<TD id="places_vocal4">-</TD>
+					<TD id="places_dance4">-</TD>
+					<TD id="places_visual4">-</TD>
+					<TD id="places_mental4">-</TD>
+					<TD id="places_skillPoint4">-</TD>
+					<TD id="places_stamina4">-</TD>
+					<TD id="places_fan4">-</TD>
+					<TD id="places_troubleRate4">-</TD>
+					<TD id="places_supportIdols4">-</TD>
+					<TD id="places_boostedParams4">-</TD>
+				</TR>
+				<TR>
+					<TD id="places_isPromised5">-</TD>
+					<TD id="places_name5">-</TD>
+					<TD id="places_level5">-</TD>
+					<TD id="places_vocal5">-</TD>
+					<TD id="places_dance5">-</TD>
+					<TD id="places_visual5">-</TD>
+					<TD id="places_mental5">-</TD>
+					<TD id="places_skillPoint5">-</TD>
+					<TD id="places_stamina5">-</TD>
+					<TD id="places_fan5">-</TD>
+					<TD id="places_troubleRate5">-</TD>
+					<TD id="places_supportIdols5">-</TD>
+					<TD id="places_boostedParams5">-</TD>
+				</TR>
+				<TR>
+					<TD id="places_isPromised6">-</TD>
+					<TD id="places_name6">-</TD>
+					<TD id="places_level6">-</TD>
+					<TD id="places_vocal6">-</TD>
+					<TD id="places_dance6">-</TD>
+					<TD id="places_visual6">-</TD>
+					<TD id="places_mental6">-</TD>
+					<TD id="places_skillPoint6">-</TD>
+					<TD id="places_stamina6">-</TD>
+					<TD id="places_fan6">-</TD>
+					<TD id="places_troubleRate6">-</TD>
+					<TD id="places_supportIdols6">-</TD>
+					<TD id="places_boostedParams6">-</TD>
+				</TR>
+				<TR>
+					<TD id="places_isPromised7">-</TD>
+					<TD id="places_name7">-</TD>
+					<TD id="places_level7">-</TD>
+					<TD id="places_vocal7">-</TD>
+					<TD id="places_dance7">-</TD>
+					<TD id="places_visual7">-</TD>
+					<TD id="places_mental7">-</TD>
+					<TD id="places_skillPoint7">-</TD>
+					<TD id="places_stamina7">-</TD>
+					<TD id="places_fan7">-</TD>
+					<TD id="places_troubleRate7">-</TD>
+					<TD id="places_supportIdols7">-</TD>
+					<TD id="places_boostedParams7">-</TD>
+				</TR>
+			</TABLE>
+		</details>
+		<details>
+			<summary style="outline:none;">サポートアイドル</summary>
+		</details>
+		<details>
+			<summary style="outline:none;">サポートスキル</summary>
+			<TABLE class="shipop-table" id="shipop-spskills">
+				<TR>
+					<TH style="background-color:lightgrey; width:60px;">タイプ</TH>
+					<TH style="background-color:lightgrey; width:60px;">場所</TH>
+					<TH style="background-color:lightgrey; width:150px;">スキル名</TH>
+					<TH style="background-color:lightgrey; width:40px;">発動率</TH>
+					<TH style="background-color:lightgrey; width:30px;">補正</TH>
+					<TH style="background-color:lightgrey; width:200px;">サポート</TH>
+				</TR>
+				<TR id="shipop-spskills-base" style="display:none;">
+					<TD class="spskills_effect_type">-</TD>
+					<TD class="spskills_place">-</TD>
+					<TD class="spskills_name">-</TD>
+					<TD class="spskills_rate">-</TD>
+					<TD class="spskills_value">-</TD>
+					<TD class="spskills_chara">-</TD>
+				</TR>
+			</TABLE>
+		</details>
+	</div>
+	<div class="shipop-iframe" id="shipop-iframe-3">
+		<details>
+			<summary style="outline:none;" open>イベント</summary>
+			<DIV id="event_actionName"> </DIV>
+			<DIV><SPAN id="event_eventCategoryName"></SPAN><SPAN id="event_title"> </SPAN></DIV>
+			<TABLE class="shipop-table" id="shipop-eventparam">
+				<TR>
+					<TH style="background-color:lightpink;">Vo</TH>
+					<TH style="background-color:lightblue;">Da</TH>
+					<TH style="background-color:gold;">Vi</TH>
+					<TH style="background-color:rgb(245, 187, 245)">Me</TH>
+					<TH style="background-color:lightsalmon;">Sp</TH>
+					<TH style="background-color:lightgreen;">St</TH>
+					<TH style="background-color:lightgrey; width:50px;">ファン</TH>
+					<TH style="background-color:lightgrey; width:50px;">テンション</TH>
+					<TH style="background-color:green; width:40px;">思い出</TH>
+					<TH style="background-color:lightgrey; width:40px;">友好度</TH>
+				</TR>
+				<TR>
+					<TD id="eventparam_vocal">-</TD>
+					<TD id="eventparam_dance">-</TD>
+					<TD id="eventparam_visual">-</TD>
+					<TD id="eventparam_mental">-</TD>
+					<TD id="eventparam_skillPoint">-</TD>
+					<TD id="eventparam_stamina">-</TD>
+					<TD id="eventparam_fan">-</TD>
+					<TD id="eventparam_tension">-</TD>
+					<TD id="eventparam_memoryAppeal">-</TD>
+					<TD id="eventparam_friendship">-</TD>
+				</TR>
+			</TABLE>
+			<TABLE class="shipop-table" id="shipop-eventselects">
+				<TR>
+					<TH style="background-color:lightgrey; width:70px;">ラベル</TH>
+					<TH style="background-color:lightgrey; width:80px;">名前</TH>
+					<TH style="background-color:lightgrey; width:300px;">テキスト</TH>
+					<TH style="background-color:lightgrey; width:70px;">次ラベル</TH>
+				</TR>
+			</TABLE>
+		</details>
+		<details>
+			<summary style="outline:none;">イベント詳細</summary>
+			<TABLE class="shipop-table" id="shipop-eventtracks">
+				<TR>
+					<TH style="background-color:lightgrey; width:70px;">ラベル</TH>
+					<TH style="background-color:lightgrey; width:80px;">名前</TH>
+					<TH style="background-color:lightgrey; width:300px;">テキスト</TH>
+					<TH style="background-color:lightgrey; width:70px;">次ラベル</TH>
+				</TR>
+				<TR id="shipop-eventtracks-base" style="display:none;">
+					<TD class="eventtracks_label">-</TD>
+					<TD class="eventtracks_speaker">-</TD>
+					<TD class="eventtracks_text" style="text-align:left;">-</TD>
+					<TD class="eventtracks_nextlabel">-</TD>
+				</TR>
+			</TABLE>
+		</details>
+	</div>
+	<details>
+		<summary style="outline:none;">WIKIページ</summary>
+		<div class="shipop-crossframe-container">
+			<iframe class="shipop-crossframes" id="shipop-crossframe-1" />
+		</div>
+	</details>
 </body>
+
 </html>
