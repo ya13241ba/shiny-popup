@@ -27,9 +27,7 @@
     "lib/moment.min.js",
     "embeded-style.css",
     "shimng-idol.css",
-    "html/shipop-content-1.html",
-    "html/shipop-content-2.html",
-    "html/shipop-content-3.html",
+    "html/shipop-content-base.html",
     "js/embeded-script.js",
     "js/shiwiki-emb.js"
   ],

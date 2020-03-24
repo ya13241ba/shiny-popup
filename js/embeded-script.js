@@ -102,7 +102,20 @@ function shipopProducePage( psaveProduceAudition, psaveHomePage ) {
   return shipopProduceIdol;
 }
 
-function shipopEventPage( peventPage ) {
+function shipopEventPage( peventPage, peventType ) {
+  var objRet = null;
+  switch( peventType ) {
+  case "1":
+    objRet = shipopNormalEventPage( peventPage );
+    break;
+  case "2":
+    objRet = shipopKishaEventPage( peventPage );
+    break;  
+  }
+  return objRet;
+}
+
+function shipopNormalEventPage( peventPage ) {
   var shipopEventInfo = {};
   var shipopEventTracks = new Array();
 
@@ -187,6 +200,98 @@ function shipopEventPage( peventPage ) {
       }
     }
   }
+
+  return {
+    "eventInfo"   : shipopEventInfo,
+    "eventTracks" : shipopEventTracks
+  };
+}
+
+function shipopKishaEventPage( peventPage ) {
+  var shipopEventInfo = {};
+  var shipopEventTracks = new Array();
+
+  // var esp = peventPage;
+  // if ( esp ) {
+  //   // *** Event Info ***
+  //   shipopEventInfo.actionName         = esp._event.eventCategory.actionName;
+  //   shipopEventInfo.eventCategoryName  = esp._event.eventCategoryName;
+  //   shipopEventInfo.title              = esp._event.title;
+  //   shipopEventInfo.answers            = esp._event.answers;
+  //   shipopEventInfo.character_id       = esp._event.character_id;
+  //   shipopEventInfo.produceEventParams = esp._event.produceEventParams;
+
+  //   if ( esp._event.eventParam ) {
+  //     shipopEventInfo.isExists     = ( true                                    );
+  //     shipopEventInfo.vocal        = ( esp._event.eventParam.vocal             );
+  //     shipopEventInfo.dance        = ( esp._event.eventParam.dance             );
+  //     shipopEventInfo.visual       = ( esp._event.eventParam.visual            );
+  //     shipopEventInfo.mental       = ( esp._event.eventParam.mental            );
+  //     shipopEventInfo.skillPoint   = ( esp._event.eventParam.skillPoint        );
+  //     shipopEventInfo.stamina      = ( esp._event.eventParam.stamina           );
+  //     shipopEventInfo.fan          = ( esp._event.eventParam.fan               );
+  //     shipopEventInfo.tension      = ( esp._event.eventParam.tension           );
+  //     shipopEventInfo.memoryPoint  = ( esp._event.eventParam.memoryPoint       );
+  //     shipopEventInfo.friendship   = ( esp._event.eventParam.friendship        );
+  //   } else if ( esp._event.param ) {
+  //     shipopEventInfo.isExists     = ( true                                    );
+  //     shipopEventInfo.vocal        = ( esp._event.param.vocal             );
+  //     shipopEventInfo.dance        = ( esp._event.param.dance             );
+  //     shipopEventInfo.visual       = ( esp._event.param.visual            );
+  //     shipopEventInfo.mental       = ( esp._event.param.mental            );
+  //     shipopEventInfo.skillPoint   = ( esp._event.param.skillPoint        );
+  //     shipopEventInfo.stamina      = ( esp._event.param.stamina           );
+  //     shipopEventInfo.fan          = ( ""                                 );
+  //     shipopEventInfo.tension      = ( esp._event.param.tension           );
+  //     shipopEventInfo.memoryPoint  = ( esp._event.param.memoryPoint       );
+  //     shipopEventInfo.friendship   = ( ""                                 );
+  //   } else {
+  //     shipopEventInfo.isExists     = ( false );
+  //     shipopEventInfo.vocal        = ( "" );
+  //     shipopEventInfo.dance        = ( "" );
+  //     shipopEventInfo.visual       = ( "" );
+  //     shipopEventInfo.mental       = ( "" );
+  //     shipopEventInfo.skillPoint   = ( "" );
+  //     shipopEventInfo.stamina      = ( "" );
+  //     shipopEventInfo.fan          = ( "" );
+  //     shipopEventInfo.tension      = ( "" );
+  //     shipopEventInfo.memoryPoint  = ( "" );
+  //     shipopEventInfo.friendship   = ( "" );
+  //   }
+
+  //   // *** Event Tracks ***
+  //   shipopEventInfo.firstEventText = "";
+  //   if ( esp._eventTracks ) {
+  //     for ( var idx = 0; idx < esp._eventTracks.length; idx++ ) {
+  //       var eventTrack = esp._eventTracks[ idx ];
+
+  //       var shipopEventTrackItem = {};
+  //       if ( eventTrack.speaker ) {
+  //         // Normal Conversation
+  //         shipopEventTrackItem.label     = eventTrack.label;
+  //         shipopEventTrackItem.speaker   = eventTrack.speaker;
+  //         shipopEventTrackItem.text      = eventTrack.text;
+  //         shipopEventTrackItem.nextLabel = eventTrack.nextLabel;
+  //       } else if ( eventTrack.select ) {
+  //         // Selection
+  //         shipopEventTrackItem.label     = "";
+  //         shipopEventTrackItem.speaker   = "";
+  //         shipopEventTrackItem.text      = eventTrack.select;
+  //         shipopEventTrackItem.nextLabel = eventTrack.nextLabel;
+  //       }
+
+  //       // 空の要素はスキップする
+  //       if ( Object.keys(shipopEventTrackItem) != 0 ) {
+  //         // 要素追加
+  //         shipopEventTracks.push( shipopEventTrackItem );
+  //         // 最初お会話をキャプチャ
+  //         if ( !shipopEventInfo.firstEventText ) {
+  //           shipopEventInfo.firstEventText = shipopEventTrackItem.text;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 
   return {
     "eventInfo"   : shipopEventInfo,
@@ -362,14 +467,47 @@ function localemit(_tttt, _eeee, _r, _n, _o, _a) {
       }
     }
 
-    // 記者イベント
-    else if ( _eeee && _eeee._eventAnswers ) {
-      window.saveKishaResponse = _eeee;
-    }
-
   }
-  if ( _eeee && _eeee._eventAnswers ) {
-    window.saveKishaResponseArray.push({_tttt, _eeee});
+
+  if (  _tttt == "endText" ) {
+    // window.saveKishaResponseArray.push( this );
+    // endText1
+    // this._event._producerCommentUI._name._text
+    // プロデューサー
+    // this._event._producerCommentUI._content._text
+    // ○○様の～
+    // endText2
+    // this._event._producerCommentUI._name._text
+    // プロデューサー
+    // this._event._producerCommentUI._content._text
+    // 密着取材の以来だ
+    // this._event._answersLayer.children[0]._answerItems[0].children[1]._text
+    // this._event._answersLayer.children[0]._answerItems[1].children[1]._text
+    // endText3
+    // this._event._producerCommentUI._name._text
+    // プロデューサー
+    // this._event._producerCommentUI._content._text
+    // よしそれじゃあ
+    // this._event._eventAnswers[0-2]
+    // endText4
+    // this._event._producerCommentUI._name._text
+    // プロデューサー
+    // this._event._producerCommentUI._content._text
+    // 良い記事を
+    // this._event._answersLayer.children[0]._answerItems[0].children[1]._text
+    // this._event._answersLayer.children[0]._answerItems[1].children[1]._text
+    // 判定
+    // endText6
+    // this._event._producerCommentUI._name._text
+    // 敏腕記者
+    // this._event._producerCommentUI._content._text
+    // 努めます
+
+    // this._event._eventAnswers[0-2].
+    // 0: comment1: "プライベートの様子"comment2: "いい記事を書いてもらえそうだ！?これでお願いしようかな？"id: "110100"produceReporterEventId: "1"selectNum: 2__proto__: Object
+    // 1: comment1: "レッスンの様子"comment2: "ちょっと心配だけど……?これでお願いしようかな？"id: "110200"produceReporterEventId: "1"selectNum: 1__proto__: Object
+    // 2: comment1: "仕事の様子"comment2: "たぶん大丈夫だろう?これでお願いしようかな？"id: "110300"produceReporterEventId: "1"selectNum: 3__proto__: Objectlength: 3__proto__: Array(0)
+
   }
 
   if ( _tttt == "added" ) {
@@ -422,58 +560,69 @@ function localemit(_tttt, _eeee, _r, _n, _o, _a) {
       }
     }
 
+    var blnEventUpdate = false;
+    // 通常イベント
     if ( _eeee && _eeee._event &&  _eeee._event.eventCategory ) {
-      // 同じイベントは１回だけ作成する
       if ( window.saveEventPageId != _eeee._event.id ) {
+        blnEventUpdate = true;
         window.saveEventPageId = _eeee._event.id;
         window.saveEventPage   = _eeee;
-
-        var evPage = shipopEventPage( window.saveEventPage );
-        window.postMessage({
-          identify: "shipop",
-          direction: "shipop-main",
-          message: "",
-          shipopProduceIdol   : null,
-          shipopPlaces        : null,
-          shipopSupportSkills : null,
-          shipopSupportIdols  : null,
-          shipopEventInfo     : evPage.eventInfo,
-          shipopEventTracks   : evPage.eventTracks
-        }, "*");
-
-        // Save Produce Log
-        if ( window.saveProduceAudition ) {
-          window.postMessage({
-            identify: "shipop",
-            direction: "shipop-producelog",
-            message: "",
-            shipopLogTYpe          : "EventResult",
-            shipopLessonIdolId     : window.saveProduceAudition._store.produceIdol.id,
-            shipopLessonSeasonNum  : window.saveProduceAudition._store.seasonNum,
-            shipopLessonSeasonWeek : shipopConvertRemainSeasonWeek(window.saveProduceAudition._store.seasonNum, window.saveProduceAudition._store.remainSeasonWeek),
-            shipopProduceIdol      : shipopProducePage( window.saveProduceAudition, null ),
-            shipopEventId          : window.saveEventPageId,
-            shipopEventResult      : evPage.eventInfo,
-            shipopUpdateTime       : ( new Date().getTime() )
-          }, "*");
-        } else {
-          window.postMessage({
-            identify: "shipop",
-            direction: "shipop-producelog",
-            message: "",
-            shipopLogTYpe          : "EventResult",
-            shipopLessonIdolId     : "",
-            shipopLessonSeasonNum  : "",
-            shipopLessonSeasonWeek : "",
-            shipopProduceIdol      : "",
-            shipopEventId          : window.saveEventPageId,
-            shipopEventResult      : evPage.eventInfo,
-            shipopUpdateTime       : ( new Date().getTime() )
-          }, "*");
-        }
-
+        window.saveEventPageType = "1";
+      }
+    // 記者イベント
+    } else if ( _eeee && _eeee._reporterAppearance && _eeee._eventAnswers ) {
+      if ( window.saveEventPageId != _eeee._reporterAppearance.name ) {
+        blnEventUpdate = true;
+        window.saveEventPageId = _eeee._reporterAppearance.name;
+        window.saveEventPage   = _eeee;
+        window.saveEventPageType = "2";
       }
     }
+    if ( blnEventUpdate ) {
+      var evPage = shipopEventPage( window.saveEventPage, window.saveEventPageType );
+      window.postMessage({
+        identify: "shipop",
+        direction: "shipop-main",
+        message: "",
+        shipopProduceIdol   : null,
+        shipopPlaces        : null,
+        shipopSupportSkills : null,
+        shipopSupportIdols  : null,
+        shipopEventInfo     : evPage.eventInfo,
+        shipopEventTracks   : evPage.eventTracks
+      }, "*");
+
+      // Save Produce Log
+      if ( window.saveProduceAudition ) {
+        window.postMessage({
+          identify: "shipop",
+          direction: "shipop-producelog",
+          message: "",
+          shipopLogTYpe          : "EventResult",
+          shipopLessonIdolId     : window.saveProduceAudition._store.produceIdol.id,
+          shipopLessonSeasonNum  : window.saveProduceAudition._store.seasonNum,
+          shipopLessonSeasonWeek : shipopConvertRemainSeasonWeek(window.saveProduceAudition._store.seasonNum, window.saveProduceAudition._store.remainSeasonWeek),
+          shipopProduceIdol      : shipopProducePage( window.saveProduceAudition, null ),
+          shipopEventId          : window.saveEventPageId,
+          shipopEventResult      : evPage.eventInfo,
+          shipopUpdateTime       : ( new Date().getTime() )
+        }, "*");
+      } else {
+        window.postMessage({
+          identify: "shipop",
+          direction: "shipop-producelog",
+          message: "",
+          shipopLogTYpe          : "EventResult",
+          shipopLessonIdolId     : "",
+          shipopLessonSeasonNum  : "",
+          shipopLessonSeasonWeek : "",
+          shipopProduceIdol      : "",
+          shipopEventId          : window.saveEventPageId,
+          shipopEventResult      : evPage.eventInfo,
+          shipopUpdateTime       : ( new Date().getTime() )
+        }, "*");
+      }
+    }    
   }
 
   if ( _eeee && _eeee._myPage ) {
@@ -648,7 +797,7 @@ function shipopTimeoutLoop() {
 
   // tab3
   if ( window.tab1elem3 ) {
-    var evPage = shipopEventPage( window.saveEventPage );
+    var evPage = shipopEventPage( window.saveEventPage, window.saveEventPageType );
     shipopEventInfo   = evPage.eventInfo;
     shipopEventTracks = evPage.eventTracks;
   }
