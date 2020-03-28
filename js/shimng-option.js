@@ -1,3 +1,4 @@
+"use strict";
 var FORMAT_TIMESTAMP = "YYYYMMDDHHmmss";
 // *** 公開プロパティ ***
 // shipopLastUpdateFlg：最終更新分をバックアップ対象に含めるか？
@@ -54,9 +55,13 @@ function shipopBackupProduceLog() {
             // Last Update Log
         }
         else {
-            // plog data
+            // Produce Log
+            // (1) push log
             bkarray.push(localStorage.getItem(lskey));
+            // (2) remove log
             localStorage.removeItem(lskey);
+            // (3) move current index
+            i--;
         }
     }
     if (bkarray.length < 0) {

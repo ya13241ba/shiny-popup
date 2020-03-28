@@ -10,6 +10,9 @@ var CONST_IDOLTYPE = [
   "userReserveSupportIdol"  // Ｓアイドル控室
 ]
 
+// DEBUG SWITCH
+var FLG_NOT_NCAPTURE = false;
+
 // shiout element
 var shiout = document.getElementById("shipop-out");
 var navtop = document.getElementById("shipopul");
@@ -23,18 +26,6 @@ function shipopConvertRemainSeasonWeek( pseason, premainSeasonWeek ) {
     return ( 2 - premainSeasonWeek + 1 );
   }
   return ( 8 - premainSeasonWeek + 1 );
-}
-
-function shipopContentChange( navidx ){
-  for (var i = 0; i < contentlist.length; i++) {
-    if ( i === navidx ) {
-      navlist[i].children[0].classList.add("shipop-tab-selected");
-      contentlist[i].style.display = "";
-    } else {
-      navlist[i].children[0].classList.remove("shipop-tab-selected");
-      contentlist[i].style.display = "none";
-    }
-  }
 }
 
 function shipopIDMapping( ptabno, ptabelem, pidName ){
@@ -300,26 +291,19 @@ function shipopKishaEventPage( peventPage ) {
 }
 
 // content load
-var isNOTN = false;
-var savePrimJsp = primJsp;
-var saveN1190 = null;
-var saveN1190Ret = null;
-var saveN1190LOCALE = null;
-var saveN1190LOCALT = null;
-var saveN1190LOCALN = null;
-
-// var saveAddEventListener = window.addEventListener;
-// var saveELArray = new Array();
-// window.addEventListener = function(a,b,c) {
-//   saveELArray.push( {a, b, c} );
-//   return saveAddEventListener(a,b,c);
-// };
 
 var saveEmitFunc = null;
 
-window.aryNFunc = new Array();
-window.aryCloneNFunc = new Array();
+window.saveAryNFunc = new Array();
+
+var savePrimJsp = primJsp;
 primJsp = function(f,n,d) {
+
+  var saveN1190 = null;
+  var saveN1190Ret = null;
+  var saveN1190LOCALE = null;
+  var saveN1190LOCALT = null;
+  var saveN1190LOCALN = null;
 
   if ( n[1190] ) {
     // EventFirst
@@ -329,8 +313,10 @@ primJsp = function(f,n,d) {
       saveN1190LOCALE = e;
       saveN1190LOCALT = t;
       saveN1190LOCALN = n;
-      saveEmitFunc = saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit;
-      saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit = localemit;
+      if ( saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit != localemit ) {
+        saveEmitFunc = saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit;
+        saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit = localemit;
+      }
       return saveN1190Ret;
     };
   } else if ( n[1195] ) {
@@ -341,8 +327,10 @@ primJsp = function(f,n,d) {
       saveN1190LOCALE = e;
       saveN1190LOCALT = t;
       saveN1190LOCALN = n;
-      saveEmitFunc = saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit;
-      saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit = localemit;
+      if ( saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit != localemit ) {
+        saveEmitFunc = saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit;
+        saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit = localemit;
+      }
       return saveN1190Ret;
     };
   } else if ( n[1193] ) {
@@ -353,13 +341,15 @@ primJsp = function(f,n,d) {
       saveN1190LOCALE = e;
       saveN1190LOCALT = t;
       saveN1190LOCALN = n;
-      saveEmitFunc = saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit;
-      saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit = localemit;
+      if ( saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit != localemit ) {
+        saveEmitFunc = saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit;
+        saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit = localemit;
+      }
       return saveN1190Ret;
     };
   }
 
-  if ( isNOTN ) {
+  if ( FLG_NOT_NCAPTURE ) {
     if ( arguments.length == 2 ) {
       return savePrimJsp(f,n);
     } else {
@@ -367,7 +357,7 @@ primJsp = function(f,n,d) {
     }
   }
 
-  window.aryNFunc.push(n);
+  window.saveAryNFunc.push( { "f": f, "n" : n, "d" : d } );
   var nkeys = Object.keys(n);
 
   var cloneN = new Object();
@@ -397,7 +387,6 @@ primJsp = function(f,n,d) {
     execAwait();
   }
 
-  window.aryCloneNFunc.push(cloneN);
   return savePrimJsp(f,n,d);
 };
 
@@ -696,10 +685,8 @@ function localemit(_tttt, _eeee, _r, _n, _o, _a) {
   return saveEmitFunc.bind(this)(_tttt, _eeee, _r, _n, _o, _a);
 }
 
-window.tab1elem  = true;
-window.tab1elem2 = true;
-window.tab1elem3 = true;
-
+// First Update Schedules
+window.setTimeout(shipopTimeoutLoop, 1000);
 function shipopTimeoutLoop() {
 
   // Canvas Loaded Check
@@ -718,114 +705,108 @@ function shipopTimeoutLoop() {
   var shipopEventTracks = new Array();
 
   // tab1
-  if ( window.tab1elem ) {
-    shipopProduceIdol = shipopProducePage( window.saveProduceAudition, window.saveHomePage );
-  }
+  shipopProduceIdol = shipopProducePage( window.saveProduceAudition, window.saveHomePage );
 
   // tab2
-  if ( window.tab1elem2 ) {
-    var tab2places = null;
-    if ( window.saveProduceAudition && window.saveProduceAudition._store.places ) {
-      tab2places = window.saveProduceAudition._store.places;
-    }
-    var tab2supportSkills = null;
-    if ( window.saveProduceAudition && window.saveProduceAudition._store.supportSkills ) {
-      tab2supportSkills = window.saveProduceAudition._store.supportSkills;
-    }
-    var tab2supportIdols = null;
-    if ( window.saveProduceAudition && window.saveProduceAudition._store.supportIdols ) {
-      tab2supportIdols = window.saveProduceAudition._store.supportIdols;
-    }
+  var tab2places = null;
+  if ( window.saveProduceAudition && window.saveProduceAudition._store.places ) {
+    tab2places = window.saveProduceAudition._store.places;
+  }
+  var tab2supportSkills = null;
+  if ( window.saveProduceAudition && window.saveProduceAudition._store.supportSkills ) {
+    tab2supportSkills = window.saveProduceAudition._store.supportSkills;
+  }
+  var tab2supportIdols = null;
+  if ( window.saveProduceAudition && window.saveProduceAudition._store.supportIdols ) {
+    tab2supportIdols = window.saveProduceAudition._store.supportIdols;
+  }
 
-    if ( tab2places && tab2places.length > 0 ) {
-      for (var idx = 1; idx <= 7; idx++) {
-        // COMPOSE SUPPORT IDOLS
-        var psupporIdols = "";
-        var supporIdolsCount = 0;
-        if ( tab2places[(idx - 1)].supportIdols ) {
-          supporIdolsCount = tab2places[(idx - 1)].supportIdols.length;
-        }
+  if ( tab2places && tab2places.length > 0 ) {
+    for (var idx = 1; idx <= 7; idx++) {
+      // COMPOSE SUPPORT IDOLS
+      var psupporIdols = "";
+      var supporIdolsCount = 0;
+      if ( tab2places[(idx - 1)].supportIdols ) {
+        supporIdolsCount = tab2places[(idx - 1)].supportIdols.length;
+      }
 
-        if ( supporIdolsCount <= 0 ) {
-          // no support
-          psupporIdols = "-";
-        } else {
-          // exists support
-          for (var idx2 = 0; idx2 < supporIdolsCount; idx2++) {
-            var friendName      = tab2places[(idx - 1)].supportIdols[ idx2 ].firstName;
-            var friendshipPoint = tab2places[(idx - 1)].supportIdols[ idx2 ].friendshipPoint;
-            var friendBGColor = "white";
-            if ( friendshipPoint >= 75 ) {
-              friendBGColor = "#ffbcff";
-            } else if ( friendshipPoint >= 50 ) {
-              friendBGColor = "yellow";
-            }
-
-            if ( idx2 != 0 ) {
-              psupporIdols += "、";
-            }
-
-            psupporIdols += '<span style="background-color:' + friendBGColor + ';">';
-            psupporIdols += friendName;
-            psupporIdols += "(" + friendshipPoint + ")";
-            psupporIdols += "</span>";
+      if ( supporIdolsCount <= 0 ) {
+        // no support
+        psupporIdols = "-";
+      } else {
+        // exists support
+        for (var idx2 = 0; idx2 < supporIdolsCount; idx2++) {
+          var friendName      = tab2places[(idx - 1)].supportIdols[ idx2 ].firstName;
+          var friendshipPoint = tab2places[(idx - 1)].supportIdols[ idx2 ].friendshipPoint;
+          var friendBGColor = "white";
+          if ( friendshipPoint >= 75 ) {
+            friendBGColor = "#ffbcff";
+          } else if ( friendshipPoint >= 50 ) {
+            friendBGColor = "yellow";
           }
+
+          if ( idx2 != 0 ) {
+            psupporIdols += "、";
+          }
+
+          psupporIdols += '<span style="background-color:' + friendBGColor + ';">';
+          psupporIdols += friendName;
+          psupporIdols += "(" + friendshipPoint + ")";
+          psupporIdols += "</span>";
         }
-
-        var shipopPlaceItem = {};
-        shipopPlaceItem.isPromised    = ( tab2places[(idx - 1)].isPromised ? "◎" : "　" );
-        shipopPlaceItem.name          = tab2places[(idx - 1)].name;
-        shipopPlaceItem.level         = tab2places[(idx - 1)].level;
-        shipopPlaceItem.vocal         = tab2places[(idx - 1)].vocal;
-        shipopPlaceItem.dance         = tab2places[(idx - 1)].dance;
-        shipopPlaceItem.visual        = tab2places[(idx - 1)].visual;
-        shipopPlaceItem.mental        = tab2places[(idx - 1)].mental;
-        shipopPlaceItem.skillPoint    = tab2places[(idx - 1)].skillPoint;
-        shipopPlaceItem.stamina       = tab2places[(idx - 1)].stamina;
-        shipopPlaceItem.fan           = tab2places[(idx - 1)].fan;
-        shipopPlaceItem.troubleRate   = tab2places[(idx - 1)].troubleRate;
-        shipopPlaceItem.supportIdols  = psupporIdols;
-        shipopPlaceItem.boostedParams = tab2places[(idx - 1)].boostedParams;
-        shipopPlaces.push( shipopPlaceItem );
       }
+
+      var shipopPlaceItem = {};
+      shipopPlaceItem.isPromised    = ( tab2places[(idx - 1)].isPromised ? "◎" : "　" );
+      shipopPlaceItem.name          = tab2places[(idx - 1)].name;
+      shipopPlaceItem.level         = tab2places[(idx - 1)].level;
+      shipopPlaceItem.vocal         = tab2places[(idx - 1)].vocal;
+      shipopPlaceItem.dance         = tab2places[(idx - 1)].dance;
+      shipopPlaceItem.visual        = tab2places[(idx - 1)].visual;
+      shipopPlaceItem.mental        = tab2places[(idx - 1)].mental;
+      shipopPlaceItem.skillPoint    = tab2places[(idx - 1)].skillPoint;
+      shipopPlaceItem.stamina       = tab2places[(idx - 1)].stamina;
+      shipopPlaceItem.fan           = tab2places[(idx - 1)].fan;
+      shipopPlaceItem.troubleRate   = tab2places[(idx - 1)].troubleRate;
+      shipopPlaceItem.supportIdols  = psupporIdols;
+      shipopPlaceItem.boostedParams = tab2places[(idx - 1)].boostedParams;
+      shipopPlaces.push( shipopPlaceItem );
     }
+  }
 
-    // Create/Remove Rows
-    if ( tab2supportSkills ) {
-      var sprows = new Array();
-      for ( var idx = 0; idx < tab2supportSkills.length; idx++ ) {
-        var supportSkill = tab2supportSkills[ idx ];
+  // Create/Remove Rows
+  if ( tab2supportSkills ) {
+    var sprows = new Array();
+    for ( var idx = 0; idx < tab2supportSkills.length; idx++ ) {
+      var supportSkill = tab2supportSkills[ idx ];
 
-        var shipopSpSkItem = {};
-        shipopSpSkItem.effectType             = supportSkill.effectType;
-        shipopSpSkItem.producePlaceCategoryId = supportSkill.supportSkillEffect.producePlaceCategoryId;
-        shipopSpSkItem.name                   = supportSkill.name;
-        shipopSpSkItem.supportSkillLevel      = supportSkill.supportSkillLevel;
-        shipopSpSkItem.rate                   = supportSkill.supportSkillEffect.rate;
-        shipopSpSkItem.value                  = supportSkill.supportSkillEffect.value;
-        shipopSpSkItem.characterId            = supportSkill.characterId;
-        shipopSupportSkills.push( shipopSpSkItem );
-      }
+      var shipopSpSkItem = {};
+      shipopSpSkItem.effectType             = supportSkill.effectType;
+      shipopSpSkItem.producePlaceCategoryId = supportSkill.supportSkillEffect.producePlaceCategoryId;
+      shipopSpSkItem.name                   = supportSkill.name;
+      shipopSpSkItem.supportSkillLevel      = supportSkill.supportSkillLevel;
+      shipopSpSkItem.rate                   = supportSkill.supportSkillEffect.rate;
+      shipopSpSkItem.value                  = supportSkill.supportSkillEffect.value;
+      shipopSpSkItem.characterId            = supportSkill.characterId;
+      shipopSupportSkills.push( shipopSpSkItem );
     }
+  }
 
-    if ( tab2supportIdols ) {
-      for ( var idx = 0; idx < tab2supportIdols.length; idx++ ) {
-        var shipopSpIdolsItem = {};
-        shipopSpIdolsItem.supportIdolId = tab2supportIdols[ idx ].supportIdolId;
-        shipopSpIdolsItem.characterId   = tab2supportIdols[ idx ].characterId;
-        shipopSpIdolsItem.name          = tab2supportIdols[ idx ].name;
-        shipopSupportIdols.push( shipopSpIdolsItem );
-      }
+  if ( tab2supportIdols ) {
+    for ( var idx = 0; idx < tab2supportIdols.length; idx++ ) {
+      var shipopSpIdolsItem = {};
+      shipopSpIdolsItem.supportIdolId = tab2supportIdols[ idx ].supportIdolId;
+      shipopSpIdolsItem.characterId   = tab2supportIdols[ idx ].characterId;
+      shipopSpIdolsItem.name          = tab2supportIdols[ idx ].name;
+      shipopSupportIdols.push( shipopSpIdolsItem );
     }
   }
 
   // tab3
-  if ( window.tab1elem3 ) {
-    var evPage = shipopEventPage( window.saveEventPage, window.saveEventPageType );
-    if( evPage ) {
-      shipopEventInfo   = evPage.eventInfo;
-      shipopEventTracks = evPage.eventTracks;
-    }
+  var evPage = shipopEventPage( window.saveEventPage, window.saveEventPageType );
+  if( evPage ) {
+    shipopEventInfo   = evPage.eventInfo;
+    shipopEventTracks = evPage.eventTracks;
   }
 
   // Save Value
@@ -860,6 +841,3 @@ function shipopTimeoutLoop() {
   window.setTimeout(shipopTimeoutLoop, 3000);
   return;
 }
-
-// First Update Schedules
-window.setTimeout(shipopTimeoutLoop, 1000);
