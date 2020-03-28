@@ -322,13 +322,37 @@ window.aryCloneNFunc = new Array();
 primJsp = function(f,n,d) {
 
   if ( n[1190] ) {
+    // EventFirst
     saveN1190 = n[1190];
     n[1190] = function(e, t, n) {
       saveN1190Ret = saveN1190(e, t, n);
       saveN1190LOCALE = e;
       saveN1190LOCALT = t;
       saveN1190LOCALN = n;
-
+      saveEmitFunc = saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit;
+      saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit = localemit;
+      return saveN1190Ret;
+    };
+  } else if ( n[1195] ) {
+    // ProduceTopFirst
+    saveN1190 = n[1195];
+    n[1195] = function(e, t, n) {
+      saveN1190Ret = saveN1190(e, t, n);
+      saveN1190LOCALE = e;
+      saveN1190LOCALT = t;
+      saveN1190LOCALN = n;
+      saveEmitFunc = saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit;
+      saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit = localemit;
+      return saveN1190Ret;
+    };
+  } else if ( n[1193] ) {
+    // HomeFirst
+    saveN1190 = n[1193];
+    n[1193] = function(e, t, n) {
+      saveN1190Ret = saveN1190(e, t, n);
+      saveN1190LOCALE = e;
+      saveN1190LOCALT = t;
+      saveN1190LOCALN = n;
       saveEmitFunc = saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit;
       saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit = localemit;
       return saveN1190Ret;
@@ -798,8 +822,10 @@ function shipopTimeoutLoop() {
   // tab3
   if ( window.tab1elem3 ) {
     var evPage = shipopEventPage( window.saveEventPage, window.saveEventPageType );
-    shipopEventInfo   = evPage.eventInfo;
-    shipopEventTracks = evPage.eventTracks;
+    if( evPage ) {
+      shipopEventInfo   = evPage.eventInfo;
+      shipopEventTracks = evPage.eventTracks;
+    }
   }
 
   // Save Value
