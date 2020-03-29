@@ -13,14 +13,6 @@ var CONST_IDOLTYPE = [
 // DEBUG SWITCH
 var FLG_NOT_NCAPTURE = false;
 
-// shiout element
-var shiout = document.getElementById("shipop-out");
-var navtop = document.getElementById("shipopul");
-var navlist = document.getElementsByClassName("shipopli");
-var contentlist = document.getElementsByClassName("shipop-content");
-var iframelist = document.getElementsByClassName("shipop-iframe");
-var crossframes = document.getElementsByClassName("shipop-crossframe");
-
 function shipopConvertRemainSeasonWeek( pseason, premainSeasonWeek ) {
   if ( pseason == 5 ) {
     return ( 2 - premainSeasonWeek + 1 );
@@ -28,22 +20,18 @@ function shipopConvertRemainSeasonWeek( pseason, premainSeasonWeek ) {
   return ( 8 - premainSeasonWeek + 1 );
 }
 
-function shipopIDMapping( ptabno, ptabelem, pidName ){
-  ptabelem[pidName] = $(iframelist[ptabno]).find("#" + pidName);
-}
+// function shipopSupportSkillsEdit( pspskills ) {
+//   var resSkills = new Array(8);
+//   if ( !pspskills ) {
+//     return resSkills;
+//   }
 
-function shipopSupportSkillsEdit( pspskills ) {
-  var resSkills = new Array(8);
-  if ( !pspskills ) {
-    return resSkills;
-  }
-
-  for ( var i = 0; i < pspskills.length; i++ ) {
-    var placeID = pspskills[i].producePlaceCategoryId;
-    resSkills[placeID].push(pspskills[i]);
-  }
-  return resSkills;
-}
+//   for ( var i = 0; i < pspskills.length; i++ ) {
+//     var placeID = pspskills[i].producePlaceCategoryId;
+//     resSkills[placeID].push(pspskills[i]);
+//   }
+//   return resSkills;
+// }
 
 
 function shipopProducePage( psaveProduceAudition, psaveHomePage ) {
