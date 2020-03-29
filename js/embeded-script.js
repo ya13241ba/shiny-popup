@@ -640,47 +640,48 @@ function localemit(_tttt, _eeee, _r, _n, _o, _a) {
     break;
   }
 
-  if ( _eeee && _eeee._myPage ) {
-    window.saveHomePage = _eeee;
-    window.saveHomePage.updateTime = ( new Date().getTime() );
+  if ( _eeee ) {
 
-    // プロデュース側の情報で表示できる場合はそちらでOK
-    if ( !window.saveProduceAudition ) {
+    if ( _eeee._myPage ) {
+      window.saveHomePage = _eeee;
+      window.saveHomePage.updateTime = ( new Date().getTime() );
+
+      // プロデュース側の情報で表示できる場合はそちらでOK
+      if ( !window.saveProduceAudition ) {
+        window.postMessage({
+          identify: "shipop",
+          direction: "shipop-main",
+          message: "",
+          shipopProduceIdol   : shipopProducePage( null, window.saveHomePage ),
+          shipopPlaces        : null,
+          shipopSupportSkills : null,
+          shipopSupportIdols  : null,
+          shipopEventInfo     : null,
+          shipopEventTracks   : null
+        }, "*");
+      }
+    }
+
+    if ( _eeee.lessonResult ) {
+      window.saveLessonResult.push( _eeee.lessonResult );
+      window.saveLessonResultBase.push( { "_tttt":_tttt, "this":this, "_eeee":_eeee } );
+
+      // Save Produce Log
       window.postMessage({
         identify: "shipop",
-        direction: "shipop-main",
+        direction: "shipop-producelog",
         message: "",
-        shipopProduceIdol   : shipopProducePage( null, window.saveHomePage ),
-        shipopPlaces        : null,
-        shipopSupportSkills : null,
-        shipopSupportIdols  : null,
-        shipopEventInfo     : null,
-        shipopEventTracks   : null
+        shipopLogTYpe          : "ProduceResult",
+        shipopLessonIdolId     : window.saveProduceAudition._store.produceIdol.id,
+        shipopLessonSeasonNum  : window.saveProduceAudition._store.seasonNum,
+        shipopLessonSeasonWeek : shipopConvertRemainSeasonWeek(window.saveProduceAudition._store.seasonNum, window.saveProduceAudition._store.remainSeasonWeek),
+        shipopProduceIdol      : shipopProducePage( window.saveProduceAudition, null ),
+        shipopPlaceInfo        : this._action,
+        shipopPlaceLevelUp     : _eeee.isPlaceLevelUp,
+        shipopLessonResult     : _eeee.lessonResult,
+        shipopUpdateTime       : ( new Date().getTime() )
       }, "*");
     }
-  }
-
-
-  if ( _eeee && _eeee.lessonResult ) {
-    window.saveLessonResult.push( _eeee.lessonResult );
-    window.saveLessonResultBase.push( { "_tttt":_tttt, "this":this, "_eeee":_eeee } );
-
-    // Save Produce Log
-    window.postMessage({
-      identify: "shipop",
-      direction: "shipop-producelog",
-      message: "",
-      shipopLogTYpe          : "ProduceResult",
-      shipopLessonIdolId     : window.saveProduceAudition._store.produceIdol.id,
-      shipopLessonSeasonNum  : window.saveProduceAudition._store.seasonNum,
-      shipopLessonSeasonWeek : shipopConvertRemainSeasonWeek(window.saveProduceAudition._store.seasonNum, window.saveProduceAudition._store.remainSeasonWeek),
-      shipopProduceIdol      : shipopProducePage( window.saveProduceAudition, null ),
-      shipopPlaceInfo        : this._action,
-      shipopPlaceLevelUp     : _eeee.isPlaceLevelUp,
-      shipopLessonResult     : _eeee.lessonResult,
-      shipopUpdateTime       : ( new Date().getTime() )
-    }, "*");
-
   }
 
   return saveEmitFunc.bind(this)(_tttt, _eeee, _r, _n, _o, _a);
