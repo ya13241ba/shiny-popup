@@ -19,29 +19,31 @@ function shipopSeasonRankAndRequireFan( pseason ) {
 }
 function shipopEffectType( pEffectType ){
   switch( pEffectType ) {
+  case "rest_boost"     : return "お休みﾌﾞｰｽﾄ";
+  case "stamina_support": return "体力ｻﾎﾟｰﾄ";
+  case "promise_recover": return "約束ﾘｶﾊﾞｰ";
+  case "trouble_guard"  : return "ﾄﾗﾌﾞﾙｶﾞｰﾄﾞ";
+  case "perfect_mastery": return "ﾊﾟｰﾌｪｸﾄﾏｽﾀﾘｰ";
+  case "unit_boost"     : return "ﾕﾆｯﾄﾏｽﾀﾘｰ";
+  case "tension_boost"  : return "ﾃﾝｼｮﾝﾏｽﾀﾘｰ";
+  case "friendship"     : return "ﾌﾚﾝﾄﾞ";
   case "tag_boost"      : return "ﾏｽﾀﾘｰ";
   case "tag_stamina"    : return "体力ﾏｽﾀﾘｰ";
-  case "tension_boost"  : return "Tﾏｽﾀﾘｰ";
-  case "promise_recover": return "約束ﾘｶﾊﾞｰ";
-  case "rest_boost"     : return "お休みﾌﾞｰｽﾄ"
-  case "stamina_support": return "体力ｻﾎﾟｰﾄ";
-  case "trouble_guard"  : return "ﾄﾗﾌﾞﾙｶﾞｰﾄﾞ";
-  case "friendship"     : return "ﾌﾚﾝﾄﾞ";
-  case "perfect_mastery": return "Pﾏｽﾀﾘｰ";
   }
   return pEffectType;
 }
 function shipopEffectSortOrder( pEffectType, pPlaceCategoryId ){
   switch( pEffectType ) {
-  case "tag_boost"      : return Number("1" + pPlaceCategoryId + "0");
-  case "tag_stamina"    : return Number("1" + pPlaceCategoryId + "1");
-  case "tension_boost"  : return 500;
-  case "promise_recover": return 3;
   case "rest_boost"     : return 1;
   case "stamina_support": return 2;
+  case "promise_recover": return 3;
   case "trouble_guard"  : return 4;
-  case "friendship"     : return 6;
-  case "perfect_mastery": return 5;
+  case "perfect_mastery": return 20;
+  case "friendship"     : return 21;
+  case "unit_boost"     : return 22;
+  case "tension_boost"  : return 23;
+  case "tag_boost"      : return Number("1" + pPlaceCategoryId + "0");
+  case "tag_stamina"    : return Number("1" + pPlaceCategoryId + "1");
   }
   return 999;
 }
