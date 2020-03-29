@@ -11,10 +11,10 @@ let shipopOutputPath = "";
 let shipopLastUpdateKey = "";
 
 // *** 非公開メソッド ***
-function bytesToSize(bytes) {
+function bytesToSize(bytes:number) {
     const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
     if (bytes == 0) return 'n/a';
-    let i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+    let i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)) + "", 10);
     if (i == 0) return bytes + ' ' + sizes[i];
     return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
 }
@@ -26,18 +26,28 @@ function shipopCalcLocalStorageSize () {
   let lsTotalSizeSystemInfo = 0;
 
   for ( let i = 0; i < localStorage.length; i++ ) {
+
     let lskey = localStorage.key(i);
+    if (lskey == null) {
+      continue;
+    }
+
+    let lsitem = localStorage.getItem( lskey );
+    if (lsitem == null) {
+      continue;
+    }
+
     if ( !lskey.startsWith("plog_") ) {
       // Not plog data
-      lsTotalSizeSystemInfo += localStorage.getItem( lskey ).length;
+      lsTotalSizeSystemInfo += lsitem.length;
     } else if ( lskey == "plog_lastUpdateInfo" ) {
       // lastupdate plog info
-      lsTotalSizeSystemInfo += localStorage.getItem( lskey ).length;
+      lsTotalSizeSystemInfo += lsitem.length;
       // get LastUpdate Plog Key
       shipopLastUpdateKey = "plog_" + shipopGetLastUpdateLogID();
     } else {
       // plog data
-      lsTotalSizeProduceLog += localStorage.getItem( lskey ).length;
+      lsTotalSizeProduceLog += lsitem.length;
     }
   }
 
@@ -51,6 +61,10 @@ function shipopBackupProduceLog() {
   let bkarray = new Array();
   for ( let i = 0; i < localStorage.length; i++ ) {
     let lskey = localStorage.key(i);
+    if (lskey == null) {
+      continue;
+    }
+
     if ( !lskey.startsWith("plog_") ) {
       // Not plog data
     } else if ( lskey == "plog_lastUpdateInfo" ) {
@@ -69,7 +83,7 @@ function shipopBackupProduceLog() {
   }
 
   if ( bkarray.length < 0 ) {
-    aleart( "出力対象のプロデュースログはありませんでした。#plog" );
+    alert( "出力対象のプロデュースログはありませんでした。#plog" );
     return;
   }
 
@@ -120,4 +134,4 @@ $( document ).ready( function() {
 
   // LSサイズ計算
   shipopCalcLocalStorageSize();
-}
+} );
