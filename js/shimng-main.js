@@ -19,31 +19,33 @@ function shipopSeasonRankAndRequireFan( pseason ) {
 }
 function shipopEffectType( pEffectType ){
   switch( pEffectType ) {
-  case "rest_boost"     : return "お休みﾌﾞｰｽﾄ";
-  case "stamina_support": return "体力ｻﾎﾟｰﾄ";
-  case "promise_recover": return "約束ﾘｶﾊﾞｰ";
-  case "trouble_guard"  : return "ﾄﾗﾌﾞﾙｶﾞｰﾄﾞ";
-  case "perfect_mastery": return "ﾊﾟｰﾌｪｸﾄﾏｽﾀﾘｰ";
-  case "unit_boost"     : return "ﾕﾆｯﾄﾏｽﾀﾘｰ";
-  case "tension_boost"  : return "ﾃﾝｼｮﾝﾏｽﾀﾘｰ";
-  case "friendship"     : return "ﾌﾚﾝﾄﾞ";
-  case "tag_boost"      : return "ﾏｽﾀﾘｰ";
-  case "tag_stamina"    : return "体力ﾏｽﾀﾘｰ";
+  case "rest_boost"       : return "お休みﾌﾞｰｽﾄ";
+  case "stamina_support"  : return "体力ｻﾎﾟｰﾄ";
+  case "promise_recover"  : return "約束ﾘｶﾊﾞｰ";
+  case "trouble_guard"    : return "ﾄﾗﾌﾞﾙｶﾞｰﾄﾞ";
+  case "perfect_mastery"  : return "ﾊﾟｰﾌｪｸﾄﾏｽﾀﾘｰ";
+  case "unit_boost"       : return "ﾕﾆｯﾄﾏｽﾀﾘｰ";
+  case "tension_boost"    : return "ﾃﾝｼｮﾝﾏｽﾀﾘｰ";
+  case "audition_mastery" : return "ｵｰﾃﾞｨｼｮﾝﾏｽﾀﾘｰ";
+  case "friendship"       : return "ﾌﾚﾝﾄﾞ";
+  case "tag_boost"        : return "ﾏｽﾀﾘｰ";
+  case "tag_stamina"      : return "体力ﾏｽﾀﾘｰ";
   }
   return pEffectType;
 }
 function shipopEffectSortOrder( pEffectType, pPlaceCategoryId ){
   switch( pEffectType ) {
-  case "rest_boost"     : return 1;
-  case "stamina_support": return 2;
-  case "promise_recover": return 3;
-  case "trouble_guard"  : return 4;
-  case "perfect_mastery": return 20;
-  case "friendship"     : return 21;
-  case "unit_boost"     : return 22;
-  case "tension_boost"  : return 23;
-  case "tag_boost"      : return Number("1" + pPlaceCategoryId + "0");
-  case "tag_stamina"    : return Number("1" + pPlaceCategoryId + "1");
+  case "rest_boost"       : return 1;
+  case "stamina_support"  : return 2;
+  case "promise_recover"  : return 3;
+  case "trouble_guard"    : return 4;
+  case "perfect_mastery"  : return 20;
+  case "friendship"       : return 21;
+  case "unit_boost"       : return 22;
+  case "tension_boost"    : return 23;
+  case "audition_mastery" : return 24;
+  case "tag_boost"        : return Number("1" + pPlaceCategoryId + "0");
+  case "tag_stamina"      : return Number("1" + pPlaceCategoryId + "1");
   }
   return 999;
 }
