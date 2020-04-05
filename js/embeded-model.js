@@ -1,6 +1,7 @@
 "use strict";
 class ShipopProduceIdol {
     constructor() {
+        this.produceType = "";
         this.seasonNum = "";
         this.remainSeasonWeek = "";
         this.name = "";
@@ -27,6 +28,10 @@ class ShipopProduceInfo {
     }
     create(psaveProduceAudition, psaveHomePage) {
         this.c_produceIdol = new ShipopProduceIdol();
+        var produceType = "";
+        if (psaveProduceAudition) {
+            produceType = psaveProduceAudition._store.produceType;
+        }
         var produceIdol = null;
         if (psaveProduceAudition && psaveProduceAudition._store.produceIdol) {
             produceIdol = psaveProduceAudition._store.produceIdol;
@@ -48,6 +53,7 @@ class ShipopProduceInfo {
             targetRank = psaveProduceAudition._store.targetRank;
         }
         if (produceIdol) {
+            this.c_produceIdol.produceType = produceType;
             this.c_produceIdol.seasonNum = seasonAndWeeks.season;
             this.c_produceIdol.remainSeasonWeek = seasonAndWeeks.week;
             this.c_produceIdol.name = produceIdol.userIdol.name;

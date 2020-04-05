@@ -105,11 +105,24 @@ function shipopMain( reqJSON, sender, sendResponse ) {
   var produceIdol = reqJSON.shipopProduceIdol;
   if ( produceIdol && Object.keys( produceIdol ).length !== 0 ) {
 
+    // プロデュースタイプの設定
+    switch ( produceIdol.produceType ) {
+    case "wing":
+      window.tab1elem["produceType"].html( "W.I.N.G.編" );
+      break;
+    case "fan_meeting":
+      window.tab1elem["produceType"].html( "ファン感謝祭編" );
+      break;
+    default:
+      window.tab1elem["produceType"].html( "" );
+      break;
+    }
+
     // シーズン目標ランク/ファン人数の算出
     var seasonRank = shipopSeasonRankAndRequireFan( produceIdol.seasonNum );
 
     if ( produceIdol.seasonNum == 5 ) {
-      window.tab1elem["seasonNum"       ].html( "W.I.N.G" );
+      window.tab1elem["seasonNum"       ].html( "W.I.N.G." );
       switch ( produceIdol.remainSeasonWeek ) {
       case 1:
         window.tab1elem["remainSeasonWeek"].html( "準決勝" );
@@ -423,6 +436,7 @@ window.addEventListener("load", function(event) {
 
   window.tab1elem = new Object();
   shipopIDMapping(CTAB_INFO, window.tab1elem, "messageArea"          );
+  shipopIDMapping(CTAB_INFO, window.tab1elem, "produceType"          );
   shipopIDMapping(CTAB_INFO, window.tab1elem, "seasonNum"            );
   shipopIDMapping(CTAB_INFO, window.tab1elem, "remainSeasonWeek"     );
   shipopIDMapping(CTAB_INFO, window.tab1elem, "seasonRank"           );
