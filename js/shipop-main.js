@@ -65,7 +65,10 @@ injectScript = function(file, node) {
 
 };
 
-injectJQuery(chrome.extension.getURL('/js/jquery.min.js'), 'head');
+injectJQuery(chrome.extension.getURL('/lib/jquery.min.js'), 'head');
+injectScript(chrome.extension.getURL('/js/embeded-common.js'), 'head');
+injectScript(chrome.extension.getURL('/js/embeded-model.js'), 'head');
+injectScript(chrome.extension.getURL('/js/embeded-event.js'), 'head');
 injectScript(chrome.extension.getURL('/js/embeded-script.js'), 'head');
 
 window.addEventListener("message", function(event) {

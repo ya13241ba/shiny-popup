@@ -352,7 +352,7 @@ function shipopMain( reqJSON, sender, sendResponse ) {
             }
           }
         } else if ( eventInfo.actionName == "selectProduceEvent" ) {
-          if ( eventInfo.answers ) {
+          if ( eventInfo.answers && eventInfo.produceEventParams ) {
 
             // Answerのインデックス取得
             var answerIndex = shipopEventAnswerIdx( eventInfo.answers, eventTrack.nextLabel );
@@ -395,21 +395,6 @@ function shipopMain( reqJSON, sender, sendResponse ) {
                 $(currentTrChildren[1]).css("background-color", "lightyellow");
               }
             }
-
-            // switch( eventTrack.nextLabel ) {
-            // case ( eventInfo.answers[0].id ):
-            //   cloneTr.css("background-color", "lightpink");
-            //   currentTrChildren[1].innerHTML = ( 'テンションUP' );
-            //   break;
-            // case ( eventInfo.answers[1].id ):
-            //   cloneTr.css("background-color", "lightyellow");
-            //   currentTrChildren[1].innerHTML = ( '変化なし' );
-            //   break;
-            // case ( eventInfo.answers[2].id ):
-            //   cloneTr.css("background-color", "lightblue");
-            //   currentTrChildren[1].innerHTML = ( 'テンションDOWN' );
-            //   break;
-            // }
           }
         }
 

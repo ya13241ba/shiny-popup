@@ -21,13 +21,16 @@
     "persistent": false
   },
   "web_accessible_resources": [
-    "js/jquery.min.js",
+    "lib/jquery.min.js",
+    "lib/moment.min.js",
     "DataTables/datatables.min.css",
     "DataTables/datatables.min.js",
-    "lib/moment.min.js",
     "embeded-style.css",
     "shimng-idol.css",
     "html/shipop-content-base.html",
+    "js/embeded-common.js",
+    "js/embeded-model.js",
+    "js/embeded-event.js",
     "js/embeded-script.js",
     "js/shiwiki-emb.js"
   ],
