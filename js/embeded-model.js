@@ -103,6 +103,54 @@ class ShipopPlaceInfo {
             tab2places = psaveProduceAudition._store.places;
         }
         if (tab2places && tab2places.length > 0) {
+            let createSupportIdol = (isHelper, supportIdol) => {
+                let friendName = "";
+                if (isHelper) {
+                    friendName = "はづき";
+                }
+                else {
+                    friendName = supportIdol.firstName;
+                }
+                let friendshipPoint = supportIdol.friendshipPoint;
+                let friendBGColor = "white";
+                if (friendshipPoint >= 75) {
+                    friendBGColor = "#ffbcff";
+                }
+                else if (friendshipPoint >= 50) {
+                    friendBGColor = "yellow";
+                }
+                let friendshipIdeaNote = supportIdol.idea;
+                let retVal = '<span style="background-color:' + friendBGColor + ';">';
+                retVal += friendName;
+                ;
+                retVal += "(" + friendshipPoint + "/100)";
+                retVal += "</span>";
+                if (friendshipIdeaNote) {
+                    let markString = "";
+                    switch (friendshipIdeaNote.ideaMark) {
+                        case "vocal":
+                            markString = "ボーカル";
+                            break;
+                        case "dance":
+                            markString = "ダンス";
+                            break;
+                        case "visual":
+                            markString = "ビジュアル";
+                            break;
+                        case "talk":
+                            markString = "トーク";
+                            break;
+                        case "skill_point":
+                            markString = "アピール";
+                            break;
+                        case "special":
+                            markString = "スペシャル";
+                            break;
+                    }
+                    retVal += " アイデア：" + markString + "(Lv." + friendshipIdeaNote.level + ")";
+                }
+                return retVal;
+            };
             for (let idx = 1; idx <= 7; idx++) {
                 // COMPOSE SUPPORT IDOLS
                 let psupporIdols = "";
@@ -110,30 +158,19 @@ class ShipopPlaceInfo {
                 if (tab2places[(idx - 1)].supportIdols) {
                     supporIdolsCount = tab2places[(idx - 1)].supportIdols.length;
                 }
-                if (supporIdolsCount <= 0) {
-                    // no support
-                    psupporIdols = "-";
-                }
-                else {
-                    // exists support
-                    for (let idx2 = 0; idx2 < supporIdolsCount; idx2++) {
-                        let friendName = tab2places[(idx - 1)].supportIdols[idx2].firstName;
-                        let friendshipPoint = tab2places[(idx - 1)].supportIdols[idx2].friendshipPoint;
-                        let friendBGColor = "white";
-                        if (friendshipPoint >= 75) {
-                            friendBGColor = "#ffbcff";
-                        }
-                        else if (friendshipPoint >= 50) {
-                            friendBGColor = "yellow";
-                        }
-                        if (idx2 != 0) {
-                            psupporIdols += "、";
-                        }
-                        psupporIdols += '<span style="background-color:' + friendBGColor + ';">';
-                        psupporIdols += friendName;
-                        psupporIdols += "(" + friendshipPoint + ")";
-                        psupporIdols += "</span>";
+                // COMPOSE NORMAL-SUPPORT IDOLS
+                for (let idx2 = 0; idx2 < supporIdolsCount; idx2++) {
+                    if (psupporIdols != "") {
+                        psupporIdols += "<br>";
                     }
+                    psupporIdols += createSupportIdol(false, tab2places[(idx - 1)].supportIdols[idx2]);
+                }
+                // COMPOSE HELPER(HADUKI)
+                if (tab2places[(idx - 1)].helperStaff) {
+                    if (psupporIdols != "") {
+                        psupporIdols += "<br>";
+                    }
+                    psupporIdols += createSupportIdol(true, tab2places[(idx - 1)].helperStaff);
                 }
                 let placeItem = new ShipopPlaceItem();
                 placeItem.isPromised = (tab2places[(idx - 1)].isPromised ? "◎" : "　");
