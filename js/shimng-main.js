@@ -122,12 +122,12 @@ function shipopMain( reqJSON, sender, sendResponse ) {
     var seasonRank = shipopSeasonRankAndRequireFan( produceIdol.seasonNum );
 
     if ( produceIdol.seasonNum == 5 ) {
-      window.tab1elem["seasonNum"       ].html( "W.I.N.G." );
+      window.tab1elem["seasonNum"       ].html( " W.I.N.G." );
       switch ( produceIdol.remainSeasonWeek ) {
-      case 1:
+      case "1":
         window.tab1elem["remainSeasonWeek"].html( "準決勝" );
         break;
-      case 2:
+      case "2":
         window.tab1elem["remainSeasonWeek"].html( "決勝" );
         break;
       default:
