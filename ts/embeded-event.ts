@@ -136,11 +136,23 @@ class ShipopEventHandler {
       }, "*");
     }
   
+    // オーディションページ
     if ( _eeee.name == "skillSelectLayer" && _eeee.parent ) {
       window.saveAuditionPage = _eeee.parent;
       window.saveAuditionPage.updateTime = ( new Date().getTime() );
     }
-  
+
+    // プロデュース（スキル選択画面）
+    // if ( _eeee.name == "produceIdolOverview" && _eeee.parent ) {
+    //   window.saveSkillPage = _eeee.parent;
+    //   window.saveSkillPage.updateTime = ( new Date().getTime() );
+    // }
+    if ( _eeee._allSkillPanels ) {
+      window.saveSkillPage = _eeee;
+      window.saveSkillPage.updateTime = ( new Date().getTime() );
+    }
+    
+    // アイドル一覧系
     if ( _eeee.name == "idolListContainer" ) {
       // 特訓モード判定（はづきさん選択可の場合は特訓モード）
       var evolutionItemMode = false;
@@ -167,6 +179,7 @@ class ShipopEventHandler {
       }
     }
   
+    // プロデュース（イベント開始）
     var blnEventUpdate = false;
     // 通常イベント
     if ( _eeee && _eeee._event &&  _eeee._event.eventCategory ) {

@@ -166,6 +166,84 @@ function shipopMain( reqJSON, sender, sendResponse ) {
     }
     window.tab1elem["memoryAppeal"].html( "Lv." + memAppLevel + " (" + memAppPoint + "/100)" );
 
+    var fncFesIdolPoint = ( p_produceIdol, p_memAppLevel ) => {
+      let intFesIdolPoint = 0;
+
+      var fncFesIdolPointStatus = ( pval ) => {
+        if( !pval )            { return 0; }
+        else if( pval <=  49 ) { return   0; }
+        else if( pval <=  74 ) { return  26; }
+        else if( pval <=  99 ) { return  32; }
+        else if( pval <= 132 ) { return  40; }
+        else if( pval <= 165 ) { return  50; }
+        else if( pval <= 199 ) { return  60; }
+        else if( pval <= 232 ) { return  80; }
+        else if( pval <= 265 ) { return  90; }
+        else if( pval <= 299 ) { return 110; }
+        else if( pval <= 332 ) { return 140; }
+        else if( pval <= 365 ) { return 150; }
+        else if( pval <= 399 ) { return 170; }
+        else if( pval <= 432 ) { return 200; }
+        else if( pval <= 465 ) { return 210; }
+        else if( pval <= 499 ) { return 230; }
+        else                   { return 260; }  // TODO 500以上は不明（100刻み？）
+      };
+
+      var fncFesIdolPointApeal = ( pval ) => {
+        switch( pval ) {
+        case 0:  { return   0; }
+        case 1:  { return  20; }
+        case 2:  { return  80; }
+        case 3:  { return 180; }
+        case 4:  { return 320; }
+        case 5:  { return 500; }
+        default: { return   0; }
+        }
+      };
+
+      intFesIdolPoint += fncFesIdolPointStatus( Number( p_produceIdol.vocal  ) );
+      intFesIdolPoint += fncFesIdolPointStatus( Number( p_produceIdol.dance  ) );
+      intFesIdolPoint += fncFesIdolPointStatus( Number( p_produceIdol.visual ) );
+      intFesIdolPoint += fncFesIdolPointStatus( Number( p_produceIdol.mental ) );
+      intFesIdolPoint += fncFesIdolPointApeal ( Number( p_memAppLevel      ) );
+
+      return intFesIdolPoint;
+    }
+
+    var blnFesPointOut = false;
+    try {
+      if ( window.lastUpdateFesPoint ) {
+        blnFesPointOut = ( window.lastUpdateFesPoint != fncFesIdolPoint( produceIdol, memAppLevel ) );
+      } else {
+        blnFesPointOut = true;
+      }
+    } catch ( error ) {
+      blnFesPointOut = false;
+    }
+
+    if ( blnFesPointOut ) {
+
+      window.lastUpdateFesPoint = fncFesIdolPoint( produceIdol, memAppLevel );
+
+      var strFesString = window.tab1elem["fesPoint"].val() + (new Date()).toLocaleString();
+      strFesString += " " + ( "S"+produceIdol.seasonNum + "W" + produceIdol.remainSeasonWeek ) + " [";
+
+      strFesString += "FesP:" + ( window.lastUpdateFesPoint );
+
+      strFesString += "] Vo" + ( produceIdol.vocal   + "/" + produceIdol.limitVocal  );
+      strFesString += "_Da" + ( produceIdol.dance   + "/" + produceIdol.limitDance  );
+      strFesString += "_Vi" + ( produceIdol.visual  + "/" + produceIdol.limitVisual );
+      strFesString += "_Me" + ( produceIdol.mental  + "/" + produceIdol.limitMental );
+      strFesString += "_Sp" + ( produceIdol.skillPoint );
+      strFesString += "_St" + ( produceIdol.stamina    );
+      strFesString += "_Fa" + ( produceIdol.fan        );
+      strFesString += "_Te" + ( produceIdol.tension    ) + "\n";
+
+      window.tab1elem["fesPoint"].val( strFesString );
+
+    }
+
+
     // WIKI Loading
     var strUserIdolName = produceIdol.name.replace(" ", "");
     if ( window.tab1elem["SaveProduceIdolName"] !== strUserIdolName ) {
@@ -243,6 +321,7 @@ function shipopMain( reqJSON, sender, sendResponse ) {
   }
 
 
+  // ### イベント ###
   var eventInfo = reqJSON.shipopEventInfo;
   if ( eventInfo && Object.keys( eventInfo ).length !== 0 ) {
 
@@ -451,6 +530,7 @@ window.addEventListener("load", function(event) {
   shipopIDMapping(CTAB_INFO, window.tab1elem, "fan"                  );
   shipopIDMapping(CTAB_INFO, window.tab1elem, "tension"              );
   shipopIDMapping(CTAB_INFO, window.tab1elem, "memoryAppeal"         );
+  shipopIDMapping(CTAB_INFO, window.tab1elem, "fesPoint"             );
 
   window.tab1elem2 = new Object();
   for (var idx = 1; idx <= 7; idx++) {

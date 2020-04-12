@@ -17,6 +17,7 @@ const FLG_NOT_NCAPTURE = false;  // デバックスイッチ
 // インスタンス生成
 let shipopEventHandler      = new ShipopEventHandler();
 let shipopProduceInfo       = new ShipopProduceInfo();
+let shipopSkillPanelInfo    = new ShipopSkillPanelInfo();
 let shipopPlaceInfo         = new ShipopPlaceInfo();
 let shipopSupportSkillInfo  = new ShipopSupportSkillInfo();
 let shipopSupportIdolInfo   = new ShipopSupportIdolInfo();
@@ -53,6 +54,20 @@ window.primJsp = function(f:any, n:any, d:any) {
     // ProduceTopFirst
     saveN1190 = n[1195];
     n[1195] = function(e:any, t:any, n:any) {
+      saveN1190Ret = saveN1190(e, t, n);
+      saveN1190LOCALE = e;
+      saveN1190LOCALT = t;
+      saveN1190LOCALN = n;
+      if ( saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit != ShipopEventHandler.localemit ) {
+        saveEmitFunc = saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit;
+        saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit = ShipopEventHandler.localemit;
+      }
+      return saveN1190Ret;
+    };
+  } else if ( n[1197] ) {
+    // ProduceInitMorning
+    saveN1190 = n[1197];
+    n[1197] = function(e:any, t:any, n:any) {
       saveN1190Ret = saveN1190(e, t, n);
       saveN1190LOCALE = e;
       saveN1190LOCALT = t;
@@ -138,29 +153,12 @@ function shipopTimeoutLoop() {
   }
 
   // JSON SAVE OBJECT
-  //  var shipopProduceIdol = {};
-  // var shipopPlaces = new Array();
-  // var shipopSupportSkills = new Array();
-  // var shipopSupportIdols = new Array();
   var shipopEventInfo = {};
   var shipopEventTracks = new Array();
 
   // tab1
   let shipopProduceIdol = shipopProduceInfo.create( window.saveProduceAudition, window.saveHomePage );
-
-  // tab2
-  // var tab2places = null;
-  // if ( window.saveProduceAudition && window.saveProduceAudition._store.places ) {
-  //   tab2places = window.saveProduceAudition._store.places;
-  // }
-  // var tab2supportSkills = null;
-  // if ( window.saveProduceAudition && window.saveProduceAudition._store.supportSkills ) {
-  //   tab2supportSkills = window.saveProduceAudition._store.supportSkills;
-  // }
-  // var tab2supportIdols = null;
-  // if ( window.saveProduceAudition && window.saveProduceAudition._store.supportIdols ) {
-  //   tab2supportIdols = window.saveProduceAudition._store.supportIdols;
-  // }
+  let shipopSkillPanels = shipopSkillPanelInfo.create( window.saveSkillPage );
 
   // tab2/Places
   let shipopPlaces = shipopPlaceInfo.create( window.saveProduceAudition );
@@ -168,7 +166,6 @@ function shipopTimeoutLoop() {
   let shipopSupportSkills = shipopSupportSkillInfo.create( window.saveProduceAudition );
   // tab2/SupportIdols
   let shipopSupportIdols = shipopSupportIdolInfo.create( window.saveProduceAudition );
-
 
   // tab3
   var evPage = shipopEventPageInfo.create( window.saveEventPage, window.saveEventPageType );
@@ -183,6 +180,7 @@ function shipopTimeoutLoop() {
     direction: "shipop-main",
     message: "",
     shipopProduceIdol   : shipopProduceIdol,
+    shipopSkillPanels   : shipopSkillPanels,
     shipopPlaces        : shipopPlaces,
     shipopSupportSkills : shipopSupportSkills,
     shipopSupportIdols  : shipopSupportIdols,

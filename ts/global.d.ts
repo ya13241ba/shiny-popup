@@ -4,6 +4,7 @@ interface Window {
 
     // global
     saveProduceAudition: any,
+    saveSkillPage: any,
     saveHomePage: any,
     saveEventPage: any,
     saveEventPageType:any,

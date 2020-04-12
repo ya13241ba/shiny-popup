@@ -18,6 +18,15 @@ class ShipopProduceIdol {
     memoryAppealLevel  : string = "";
     totalMemoryPoint   : string = "";
     firstEventText     : string = "";
+    fesPoint           : ShipopFesPoint = new ShipopFesPoint();
+}
+class ShipopFesPoint {
+    fesDeckRankPointCenter : string = "";
+    fesDeckRankPointDance  : string = "";
+    fesDeckRankPointLeader : string = "";
+    fesDeckRankPointVisual : string = "";
+    fesDeckRankPointVocal  : string = "";
+    fesIdolRankPoint       : string = "";
 }
 
 class ShipopProduceInfo {
@@ -76,9 +85,113 @@ class ShipopProduceInfo {
             this.c_produceIdol.tension           = produceIdol.tension;
             this.c_produceIdol.memoryAppealLevel = produceIdol.memoryAppealLevel;
             this.c_produceIdol.totalMemoryPoint  = produceIdol.totalMemoryPoint;
+
+            if ( produceIdol.memoryAppeal ) {
+                this.c_produceIdol.fesPoint.fesDeckRankPointCenter = produceIdol.memoryAppeal.fesDeckRankPointCenter;
+                this.c_produceIdol.fesPoint.fesDeckRankPointDance  = produceIdol.memoryAppeal.fesDeckRankPointDance;
+                this.c_produceIdol.fesPoint.fesDeckRankPointLeader = produceIdol.memoryAppeal.fesDeckRankPointLeader;
+                this.c_produceIdol.fesPoint.fesDeckRankPointVisual = produceIdol.memoryAppeal.fesDeckRankPointVisual;
+                this.c_produceIdol.fesPoint.fesDeckRankPointVocal  = produceIdol.memoryAppeal.fesDeckRankPointVocal;
+                this.c_produceIdol.fesPoint.fesIdolRankPoint       = produceIdol.memoryAppeal.fesIdolRankPoint;
+            }
+            
         }
         
         return this.c_produceIdol;
+    }
+}
+
+class ShipopSkillPanelItem {
+    charaId        : string = "";
+    evolutionStage : number = 0;
+    idolId         : string = "";
+    skillCategory  : string = "";
+    isAcquired     : boolean = false;
+
+    panelCategory  : number = 0;
+    sequence       : number = 0;
+    skillLevel     : number = 0;
+    skillPoint     : number = 0;
+    isArrival      : boolean = false;
+    isLocked       : boolean = false;
+
+    skill_name                   : string = "";
+    skill_comment                : string = "";
+    skill_rarity                 : number = 0;
+    skill_rate                   : number = 0;
+    skill_condition              : string = "";
+    skill_conditionAttribute     : string = "";
+    skill_conditionEffectType    : string = "";
+    skill_conditionValue         : number = 0;
+    skill_fesDeckRankPointCenter : number = 0;
+    skill_fesDeckRankPointDance  : number = 0;
+    skill_fesDeckRankPointLeader : number = 0;
+    skill_fesDeckRankPointVisual : number = 0;
+    skill_fesDeckRankPointVocal  : number = 0;
+    skill_fesIdolRankPoint       : number = 0;
+    skill_canShare               : boolean = false;
+}
+
+class ShipopSkillPanelInfo {
+    c_skillPanelItems : Array<ShipopSkillPanelItem>;
+
+    constructor() {
+        this.c_skillPanelItems = new Array<ShipopSkillPanelItem>();
+    }
+
+    create( psaveSkillPage:any ) {
+
+        this.c_skillPanelItems.length = 0;
+        
+        let tab1AllSkillPanels : any = null;
+        if ( psaveSkillPage && psaveSkillPage._allSkillPanels ) {
+            tab1AllSkillPanels = psaveSkillPage._allSkillPanels;
+        }
+        
+        if ( tab1AllSkillPanels ) {
+            Object.keys( tab1AllSkillPanels ).forEach( ( charaId ) => {
+                let skillpanels = tab1AllSkillPanels[ charaId ];
+
+                Object.keys( skillpanels ).forEach( ( i ) => {
+
+                    let skillpanel = skillpanels[ i ];
+
+                    let skillPanelItem = new ShipopSkillPanelItem();
+                    skillPanelItem.charaId        = charaId;
+                    skillPanelItem.evolutionStage = skillpanel._data.evolutionStage;
+                    skillPanelItem.idolId         = skillpanel._data.idolId        ;
+                    skillPanelItem.skillCategory  = skillpanel._data.skillCategory ;
+                    skillPanelItem.isAcquired     = skillpanel._data.isAcquired    ;
+                
+                    skillPanelItem.panelCategory  = skillpanel._data.panelCategory;
+                    skillPanelItem.sequence       = skillpanel._data.sequence     ;
+                    skillPanelItem.skillLevel     = skillpanel._data.skillLevel   ;
+                    skillPanelItem.skillPoint     = skillpanel._data.skillPoint   ;
+                    skillPanelItem.isArrival      = skillpanel._data.isArrival    ;
+                    skillPanelItem.isLocked       = skillpanel._data.isLocked     ;
+                
+                    skillPanelItem.skill_name                   = skillpanel._data.skill.name                  ;
+                    skillPanelItem.skill_comment                = skillpanel._data.skill.comment               ;
+                    skillPanelItem.skill_rarity                 = skillpanel._data.skill.rarity                ;
+                    skillPanelItem.skill_rate                   = skillpanel._data.skill.rate                  ;
+                    skillPanelItem.skill_condition              = skillpanel._data.skill.condition             ;
+                    skillPanelItem.skill_conditionAttribute     = skillpanel._data.skill.conditionAttribute    ;
+                    skillPanelItem.skill_conditionEffectType    = skillpanel._data.skill.conditionEffectType   ;
+                    skillPanelItem.skill_conditionValue         = skillpanel._data.skill.conditionValue        ;
+                    skillPanelItem.skill_fesDeckRankPointCenter = skillpanel._data.skill.fesDeckRankPointCenter;
+                    skillPanelItem.skill_fesDeckRankPointDance  = skillpanel._data.skill.fesDeckRankPointDance ;
+                    skillPanelItem.skill_fesDeckRankPointLeader = skillpanel._data.skill.fesDeckRankPointLeader;
+                    skillPanelItem.skill_fesDeckRankPointVisual = skillpanel._data.skill.fesDeckRankPointVisual;
+                    skillPanelItem.skill_fesDeckRankPointVocal  = skillpanel._data.skill.fesDeckRankPointVocal ;
+                    skillPanelItem.skill_fesIdolRankPoint       = skillpanel._data.skill.fesIdolRankPoint      ;
+                    skillPanelItem.skill_canShare               = skillpanel._data.skill.canShare              ;
+
+                    this.c_skillPanelItems.push( skillPanelItem );
+                });
+            });
+        }
+        
+        return this.c_skillPanelItems;
     }
 }
 
