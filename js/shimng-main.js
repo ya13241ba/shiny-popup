@@ -166,70 +166,66 @@ function shipopMain( reqJSON, sender, sendResponse ) {
     }
     window.tab1elem["memoryAppeal"].html( "Lv." + memAppLevel + " (" + memAppPoint + "/100)" );
 
-    var fncFesIdolPoint = ( p_produceIdol, p_memAppLevel ) => {
-      let intFesIdolPoint = 0;
+    var fncFesIdolPointStatus = ( pval ) => {
+      if( !pval )            { return 0; }
+      else if( pval <=  49 ) { return   0; }
+      else if( pval <=  74 ) { return  26; }
+      else if( pval <=  99 ) { return  32; }
+      else if( pval <= 132 ) { return  40; }
+      else if( pval <= 165 ) { return  50; }
+      else if( pval <= 199 ) { return  60; }
+      else if( pval <= 232 ) { return  80; }
+      else if( pval <= 265 ) { return  90; }
+      else if( pval <= 299 ) { return 110; }
+      else if( pval <= 332 ) { return 140; }
+      else if( pval <= 365 ) { return 150; }
+      else if( pval <= 399 ) { return 170; }
+      else if( pval <= 432 ) { return 200; }
+      else if( pval <= 465 ) { return 210; }
+      else if( pval <= 499 ) { return 230; }
+      else                   { return 260; }  // TODO 500以上は不明（100刻み？）
+    };
 
-      var fncFesIdolPointStatus = ( pval ) => {
-        if( !pval )            { return 0; }
-        else if( pval <=  49 ) { return   0; }
-        else if( pval <=  74 ) { return  26; }
-        else if( pval <=  99 ) { return  32; }
-        else if( pval <= 132 ) { return  40; }
-        else if( pval <= 165 ) { return  50; }
-        else if( pval <= 199 ) { return  60; }
-        else if( pval <= 232 ) { return  80; }
-        else if( pval <= 265 ) { return  90; }
-        else if( pval <= 299 ) { return 110; }
-        else if( pval <= 332 ) { return 140; }
-        else if( pval <= 365 ) { return 150; }
-        else if( pval <= 399 ) { return 170; }
-        else if( pval <= 432 ) { return 200; }
-        else if( pval <= 465 ) { return 210; }
-        else if( pval <= 499 ) { return 230; }
-        else                   { return 260; }  // TODO 500以上は不明（100刻み？）
-      };
+    var fncFesIdolPointApeal = ( pval ) => {
+      switch( pval ) {
+      case 0:  { return   0; }
+      case 1:  { return  20; }
+      case 2:  { return  80; }
+      case 3:  { return 180; }
+      case 4:  { return 320; }
+      case 5:  { return 500; }
+      default: { return   0; }
+      }
+    };
 
-      var fncFesIdolPointApeal = ( pval ) => {
-        switch( pval ) {
-        case 0:  { return   0; }
-        case 1:  { return  20; }
-        case 2:  { return  80; }
-        case 3:  { return 180; }
-        case 4:  { return 320; }
-        case 5:  { return 500; }
-        default: { return   0; }
+    var fncFesIdolPointSkill = ( pskills ) => {
+      let intTotalPt = (3*4);  // init active skill 3*4
+      for( let i = 0; i < pskills.length; i++ ) {
+        if ( pskills[ i ].isAcquired && pskills[ i ].skill_fesIdolRankPoint ) {
+          intTotalPt += Number( pskills[ i ].skill_fesIdolRankPoint );
         }
-      };
+      }
+      return intTotalPt;
+    }
+
+    var fncFesIdolPoint = ( p_produceIdol, p_memAppLevel, p_skillPanels ) => {
+      let intFesIdolPoint = 0;
 
       intFesIdolPoint += fncFesIdolPointStatus( Number( p_produceIdol.vocal  ) );
       intFesIdolPoint += fncFesIdolPointStatus( Number( p_produceIdol.dance  ) );
       intFesIdolPoint += fncFesIdolPointStatus( Number( p_produceIdol.visual ) );
       intFesIdolPoint += fncFesIdolPointStatus( Number( p_produceIdol.mental ) );
       intFesIdolPoint += fncFesIdolPointApeal ( Number( p_memAppLevel      ) );
+      intFesIdolPoint += fncFesIdolPointSkill ( p_skillPanels );
 
       return intFesIdolPoint;
     }
 
-    var blnFesPointOut = false;
-    try {
-      if ( window.lastUpdateFesPoint ) {
-        blnFesPointOut = ( window.lastUpdateFesPoint != fncFesIdolPoint( produceIdol, memAppLevel ) );
-      } else {
-        blnFesPointOut = true;
-      }
-    } catch ( error ) {
-      blnFesPointOut = false;
-    }
-
-    if ( blnFesPointOut ) {
-
-      window.lastUpdateFesPoint = fncFesIdolPoint( produceIdol, memAppLevel );
-
-      var strFesString = window.tab1elem["fesPoint"].val() + (new Date()).toLocaleString();
-      strFesString += " " + ( "S"+produceIdol.seasonNum + "W" + produceIdol.remainSeasonWeek ) + " [";
-
-      strFesString += "FesP:" + ( window.lastUpdateFesPoint );
-
+    // ポイント計算
+    if( produceIdol && reqJSON.shipopSkillPanels && reqJSON.shipopSkillPanels.length > 0 ) {
+      var strFesString = "";
+      strFesString += ( "S"+produceIdol.seasonNum + "W" + produceIdol.remainSeasonWeek ) + " [";
+      strFesString += "FesP:" + ( fncFesIdolPoint( produceIdol, memAppLevel, reqJSON.shipopSkillPanels ) );
       strFesString += "] Vo" + ( produceIdol.vocal   + "/" + produceIdol.limitVocal  );
       strFesString += "_Da" + ( produceIdol.dance   + "/" + produceIdol.limitDance  );
       strFesString += "_Vi" + ( produceIdol.visual  + "/" + produceIdol.limitVisual );
@@ -237,16 +233,36 @@ function shipopMain( reqJSON, sender, sendResponse ) {
       strFesString += "_Sp" + ( produceIdol.skillPoint );
       strFesString += "_St" + ( produceIdol.stamina    );
       strFesString += "_Fa" + ( produceIdol.fan        );
-      strFesString += "_Te" + ( produceIdol.tension    ) + "\n";
+      strFesString += "_Te" + ( produceIdol.tension    );
 
-      window.tab1elem["fesPoint"].val( strFesString );
+      // 更新ありの場合
+      if ( strFesString != window.lastUpdateFesPoint ) {
+        window.lastUpdateFesPoint = strFesString;
 
+        // フェスポイントログの現テキストを取得
+        let txaVal = window.tab1elem["fesPoint"].val();
+        if ( txaVal != "" ) {
+          txaVal += "\n";  // 最後に改行追加
+        }
+
+        // フェスポイントログを出力
+        window.tab1elem["fesPoint"].val(
+          txaVal + (new Date()).toLocaleString() + " " + strFesString );
+
+        // フェスポイントログを末尾スクロール
+        window.tab1elem["fesPoint"].scrollTop(window.tab1elem["fesPoint"].get(0).scrollHeight)
+
+        let strFesDetail = "";
+        for (let i = 0; i < reqJSON.shipopSkillPanels.length; i++ ) {
+          strFesDetail += "\n" + JSON.stringify( reqJSON.shipopSkillPanels[ i ] );
+        }
+        window.tab1elem["fesPointDetail"].val(strFesDetail);
+      }
     }
-
 
     // WIKI Loading
     var strUserIdolName = produceIdol.name.replace(" ", "");
-    if ( window.tab1elem["SaveProduceIdolName"] !== strUserIdolName ) {
+    if ( strUserIdolName && window.tab1elem["SaveProduceIdolName"] !== strUserIdolName ) {
 
       // Display Wiki 1
       $( "#shipop-crossframe-1" ).attr("src", 'https://wikiwiki.jp/shinycolors/' + strUserIdolName );
@@ -531,6 +547,7 @@ window.addEventListener("load", function(event) {
   shipopIDMapping(CTAB_INFO, window.tab1elem, "tension"              );
   shipopIDMapping(CTAB_INFO, window.tab1elem, "memoryAppeal"         );
   shipopIDMapping(CTAB_INFO, window.tab1elem, "fesPoint"             );
+  shipopIDMapping(CTAB_INFO, window.tab1elem, "fesPointDetail"       );
 
   window.tab1elem2 = new Object();
   for (var idx = 1; idx <= 7; idx++) {
