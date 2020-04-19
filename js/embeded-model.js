@@ -131,10 +131,49 @@ class ShipopSkillPanelInfo {
     create(psaveSkillPage) {
         this.c_skillPanelItems.length = 0;
         let tab1AllSkillPanels = null;
+        let tab1ActiveSkillPanels = null;
         if (psaveSkillPage && psaveSkillPage._allSkillPanels) {
             tab1AllSkillPanels = psaveSkillPage._allSkillPanels;
+            try {
+                tab1ActiveSkillPanels = psaveSkillPage.parent.parent._userProduceIdol.activeSkills;
+            }
+            catch (error) {
+                tab1ActiveSkillPanels = {};
+            }
         }
         if (tab1AllSkillPanels) {
+            // アクティブスキル
+            Object.keys(tab1ActiveSkillPanels).forEach((i) => {
+                let skillPanelItem = new ShipopSkillPanelItem();
+                skillPanelItem.charaId = "activeSkill";
+                skillPanelItem.evolutionStage = 0;
+                skillPanelItem.idolId = "";
+                skillPanelItem.skillCategory = "";
+                skillPanelItem.isAcquired = false;
+                skillPanelItem.panelCategory = 0;
+                skillPanelItem.sequence = 0;
+                skillPanelItem.skillLevel = 0;
+                skillPanelItem.skillPoint = 0;
+                skillPanelItem.isArrival = false;
+                skillPanelItem.isLocked = false;
+                skillPanelItem.skill_name = tab1ActiveSkillPanels[i].name;
+                skillPanelItem.skill_comment = tab1ActiveSkillPanels[i].comment;
+                skillPanelItem.skill_rarity = tab1ActiveSkillPanels[i].rarity;
+                skillPanelItem.skill_rate = tab1ActiveSkillPanels[i].rate;
+                skillPanelItem.skill_condition = tab1ActiveSkillPanels[i].condition;
+                skillPanelItem.skill_conditionAttribute = tab1ActiveSkillPanels[i].conditionAttribute;
+                skillPanelItem.skill_conditionEffectType = tab1ActiveSkillPanels[i].conditionEffectType;
+                skillPanelItem.skill_conditionValue = tab1ActiveSkillPanels[i].conditionValue;
+                skillPanelItem.skill_fesDeckRankPointCenter = tab1ActiveSkillPanels[i].fesDeckRankPointCenter;
+                skillPanelItem.skill_fesDeckRankPointDance = tab1ActiveSkillPanels[i].fesDeckRankPointDance;
+                skillPanelItem.skill_fesDeckRankPointLeader = tab1ActiveSkillPanels[i].fesDeckRankPointLeader;
+                skillPanelItem.skill_fesDeckRankPointVisual = tab1ActiveSkillPanels[i].fesDeckRankPointVisual;
+                skillPanelItem.skill_fesDeckRankPointVocal = tab1ActiveSkillPanels[i].fesDeckRankPointVocal;
+                skillPanelItem.skill_fesIdolRankPoint = tab1ActiveSkillPanels[i].fesIdolRankPoint;
+                skillPanelItem.skill_canShare = tab1ActiveSkillPanels[i].canShare;
+                this.c_skillPanelItems.push(skillPanelItem);
+            });
+            // パネルスキル
             Object.keys(tab1AllSkillPanels).forEach((charaId) => {
                 let skillpanels = tab1AllSkillPanels[charaId];
                 Object.keys(skillpanels).forEach((i) => {
