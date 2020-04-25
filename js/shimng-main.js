@@ -183,7 +183,15 @@ function shipopMain( reqJSON, sender, sendResponse ) {
       else if( pval <= 432 ) { return 200; }
       else if( pval <= 465 ) { return 210; }
       else if( pval <= 499 ) { return 230; }
-      else                   { return 260; }  // TODO 500以上は不明（100刻み？）
+      else if( pval <= 599 ) { return 260; }
+      else if( pval <= 699 ) { return 320; }
+      else if( pval <= 799 ) { return 360; }
+      else if( pval <= 899 ) { return 400; }  // TODO NOCHECK
+      else if( pval <= 999 ) { return 440; }  // TODO NOCHECK
+      else if( pval <= 1099 ) { return 500; }
+      else { 
+        return 320 + ( Math.floor( pval / 100 ) - 6 ) * 40;
+      }
     };
 
     var fncFesIdolPointApeal = ( pval ) => {
