@@ -112,17 +112,17 @@ class ShipopEventHandler {
         if (_eeee.auditionSceneName == "produceAudition") {
             window.saveProduceAudition = _eeee;
             window.saveProduceAudition.updateTime = (new Date().getTime());
-            window.postMessage({
-                identify: "shipop",
-                direction: "shipop-main",
-                message: "",
-                shipopProduceIdol: shipopProduceInfo.create(window.saveProduceAudition, null),
-                shipopPlaces: null,
-                shipopSupportSkills: null,
-                shipopSupportIdols: null,
-                shipopEventInfo: null,
-                shipopEventTracks: null
-            }, "*");
+            // window.postMessage({
+            //   identify: "shipop",
+            //   direction: "shipop-main",
+            //   message: "",
+            //   shipopProduceIdol   : shipopProduceInfo.create( window.saveProduceAudition, null ),
+            //   shipopPlaces        : null,
+            //   shipopSupportSkills : null,
+            //   shipopSupportIdols  : null,
+            //   shipopEventInfo     : null,
+            //   shipopEventTracks   : null
+            // }, "*");
         }
         // オーディションページ
         if (_eeee.name == "skillSelectLayer" && _eeee.parent) {
@@ -261,19 +261,19 @@ class ShipopEventHandler {
                 window.saveHomePage = _eeee;
                 window.saveHomePage.updateTime = (new Date().getTime());
                 // プロデュース側の情報で表示できる場合はそちらでOK
-                if (!window.saveProduceAudition) {
-                    window.postMessage({
-                        identify: "shipop",
-                        direction: "shipop-main",
-                        message: "",
-                        shipopProduceIdol: shipopProduceInfo.create(null, window.saveHomePage),
-                        shipopPlaces: null,
-                        shipopSupportSkills: null,
-                        shipopSupportIdols: null,
-                        shipopEventInfo: null,
-                        shipopEventTracks: null
-                    }, "*");
-                }
+                // if ( !window.saveProduceAudition ) {
+                //   window.postMessage({
+                //     identify: "shipop",
+                //     direction: "shipop-main",
+                //     message: "",
+                //     shipopProduceIdol   : shipopProduceInfo.create( null, window.saveHomePage ),
+                //     shipopPlaces        : null,
+                //     shipopSupportSkills : null,
+                //     shipopSupportIdols  : null,
+                //     shipopEventInfo     : null,
+                //     shipopEventTracks   : null
+                //   }, "*");
+                // }
             }
             if (_eeee.lessonResult) {
                 window.saveLessonResult.push(_eeee.lessonResult);

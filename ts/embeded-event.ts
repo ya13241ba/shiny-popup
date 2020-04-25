@@ -123,17 +123,17 @@ class ShipopEventHandler {
       window.saveProduceAudition = _eeee;
       window.saveProduceAudition.updateTime = ( new Date().getTime() );
   
-      window.postMessage({
-        identify: "shipop",
-        direction: "shipop-main",
-        message: "",
-        shipopProduceIdol   : shipopProduceInfo.create( window.saveProduceAudition, null ),
-        shipopPlaces        : null,
-        shipopSupportSkills : null,
-        shipopSupportIdols  : null,
-        shipopEventInfo     : null,
-        shipopEventTracks   : null
-      }, "*");
+      // window.postMessage({
+      //   identify: "shipop",
+      //   direction: "shipop-main",
+      //   message: "",
+      //   shipopProduceIdol   : shipopProduceInfo.create( window.saveProduceAudition, null ),
+      //   shipopPlaces        : null,
+      //   shipopSupportSkills : null,
+      //   shipopSupportIdols  : null,
+      //   shipopEventInfo     : null,
+      //   shipopEventTracks   : null
+      // }, "*");
     }
   
     // オーディションページ
@@ -201,17 +201,17 @@ class ShipopEventHandler {
     if ( blnEventUpdate ) {
       var evPage = shipopEventPageInfo.create( window.saveEventPage, window.saveEventPageType );
       if( evPage ) {
-        window.postMessage({
-          identify: "shipop",
-          direction: "shipop-main",
-          message: "",
-          shipopProduceIdol   : null,
-          shipopPlaces        : null,
-          shipopSupportSkills : null,
-          shipopSupportIdols  : null,
-          shipopEventInfo     : evPage.eventInfo,
-          shipopEventTracks   : evPage.eventTracks
-        }, "*");
+        // window.postMessage({
+        //   identify: "shipop",
+        //   direction: "shipop-main",
+        //   message: "",
+        //   shipopProduceIdol   : null,
+        //   shipopPlaces        : null,
+        //   shipopSupportSkills : null,
+        //   shipopSupportIdols  : null,
+        //   shipopEventInfo     : evPage.eventInfo,
+        //   shipopEventTracks   : evPage.eventTracks
+        // }, "*");
   
         // Save Produce Log
         if ( window.saveProduceAudition ) {
@@ -284,19 +284,19 @@ class ShipopEventHandler {
         window.saveHomePage.updateTime = ( new Date().getTime() );
   
         // プロデュース側の情報で表示できる場合はそちらでOK
-        if ( !window.saveProduceAudition ) {
-          window.postMessage({
-            identify: "shipop",
-            direction: "shipop-main",
-            message: "",
-            shipopProduceIdol   : shipopProduceInfo.create( null, window.saveHomePage ),
-            shipopPlaces        : null,
-            shipopSupportSkills : null,
-            shipopSupportIdols  : null,
-            shipopEventInfo     : null,
-            shipopEventTracks   : null
-          }, "*");
-        }
+        // if ( !window.saveProduceAudition ) {
+        //   window.postMessage({
+        //     identify: "shipop",
+        //     direction: "shipop-main",
+        //     message: "",
+        //     shipopProduceIdol   : shipopProduceInfo.create( null, window.saveHomePage ),
+        //     shipopPlaces        : null,
+        //     shipopSupportSkills : null,
+        //     shipopSupportIdols  : null,
+        //     shipopEventInfo     : null,
+        //     shipopEventTracks   : null
+        //   }, "*");
+        // }
       }
   
       if ( _eeee.lessonResult ) {
