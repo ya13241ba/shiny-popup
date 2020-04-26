@@ -187,7 +187,7 @@ function shipopMain( reqJSON, sender, sendResponse ) {
       else if( pval <= 699 ) { return 320; }
       else if( pval <= 799 ) { return 360; }
       else if( pval <= 899 ) { return 400; }  // TODO NOCHECK
-      else if( pval <= 999 ) { return 440; }  // TODO NOCHECK
+      else if( pval <= 999 ) { return 450; }
       else if( pval <= 1099 ) { return 500; }
       else { 
         return 320 + ( Math.floor( pval / 100 ) - 6 ) * 40;
