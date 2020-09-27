@@ -48,63 +48,6 @@ window.tw0mmestheetfk = function (f, n, d) {
             return saveNFuncRet;
         };
     }
-    // else if ( n[1190] ) {
-    //   // EventFirst
-    //   saveN1190 = n[1190];
-    //   n[1190] = function(e:any, t:any, n:any) {
-    //     saveN1190Ret = saveN1190(e, t, n);
-    //     saveN1190LOCALE = e;
-    //     saveN1190LOCALT = t;
-    //     saveN1190LOCALN = n;
-    //     if ( saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit != ShipopEventHandler.localemit ) {
-    //       saveEmitFunc = saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit;
-    //       saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit = ShipopEventHandler.localemit;
-    //     }
-    //     return saveN1190Ret;
-    //   };
-    // } else if ( n[1202] ) {
-    //   // ProduceTopFirst
-    //   saveN1190 = n[1202];
-    //   n[1202] = function(e:any, t:any, n:any) {
-    //     saveN1190Ret = saveN1190(e, t, n);
-    //     saveN1190LOCALE = e;
-    //     saveN1190LOCALT = t;
-    //     saveN1190LOCALN = n;
-    //     if ( saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit != ShipopEventHandler.localemit ) {
-    //       saveEmitFunc = saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit;
-    //       saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit = ShipopEventHandler.localemit;
-    //     }
-    //     return saveN1190Ret;
-    //   };
-    // } else if ( n[1197] ) {
-    //   // ProduceInitMorning
-    //   saveN1190 = n[1197];
-    //   n[1197] = function(e:any, t:any, n:any) {
-    //     saveN1190Ret = saveN1190(e, t, n);
-    //     saveN1190LOCALE = e;
-    //     saveN1190LOCALT = t;
-    //     saveN1190LOCALN = n;
-    //     if ( saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit != ShipopEventHandler.localemit ) {
-    //       saveEmitFunc = saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit;
-    //       saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit = ShipopEventHandler.localemit;
-    //     }
-    //     return saveN1190Ret;
-    //   };
-    // } else if ( n[1193] ) {
-    //   // HomeFirst
-    //   saveN1190 = n[1193];
-    //   n[1193] = function(e:any, t:any, n:any) {
-    //     saveN1190Ret = saveN1190(e, t, n);
-    //     saveN1190LOCALE = e;
-    //     saveN1190LOCALT = t;
-    //     saveN1190LOCALN = n;
-    //     if ( saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit != ShipopEventHandler.localemit ) {
-    //       saveEmitFunc = saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit;
-    //       saveN1190LOCALE.exports.default.prototype.__proto__.__proto__.__proto__.__proto__.__proto__.emit = ShipopEventHandler.localemit;
-    //     }
-    //     return saveN1190Ret;
-    //   };
-    // }
     if (FLG_NOT_NCAPTURE) {
         if (arguments.length == 2) {
             return savePrimJsp(f, n);
