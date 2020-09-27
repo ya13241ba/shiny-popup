@@ -1,6 +1,6 @@
 interface Window {
     // shiny-defined
-    primJsp: Function,
+    tw0mmestheetfk: Function,
 
     // global
     saveProduceAudition: any,
