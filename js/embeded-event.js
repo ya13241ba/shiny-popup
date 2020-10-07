@@ -185,17 +185,17 @@ class ShipopEventHandler {
         if (blnEventUpdate) {
             var evPage = shipopEventPageInfo.create(window.saveEventPage, window.saveEventPageType);
             if (evPage) {
-                window.postMessage({
-                    identify: "shipop",
-                    direction: "shipop-main",
-                    message: "",
-                    shipopProduceIdol: null,
-                    shipopPlaces: null,
-                    shipopSupportSkills: null,
-                    shipopSupportIdols: null,
-                    shipopEventInfo: evPage.eventInfo,
-                    shipopEventTracks: evPage.eventTracks
-                }, "*");
+                // window.postMessage({
+                //   identify: "shipop",
+                //   direction: "shipop-main",
+                //   message: "",
+                //   shipopProduceIdol   : null,
+                //   shipopPlaces        : null,
+                //   shipopSupportSkills : null,
+                //   shipopSupportIdols  : null,
+                //   shipopEventInfo     : evPage.eventInfo,
+                //   shipopEventTracks   : evPage.eventTracks
+                // }, "*");
                 // Save Produce Log
                 if (window.saveProduceAudition) {
                     window.postMessage({
