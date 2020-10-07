@@ -1,6 +1,6 @@
 interface Window {
     // shiny-defined
-    tw0mmestheetfk: Function,
+    vewvf1ceeelcwa: Function,
 
     // global
     saveProduceAudition: any,

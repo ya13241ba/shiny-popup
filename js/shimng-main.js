@@ -612,5 +612,9 @@ chrome.runtime.onMessage.addListener(
     if ( window.reqJSON.direction == "shipop-main" ) {
       shipopMain( window.reqJSON, sender, sendResponse );
     }
+    
+    // 空でいいのでレスポンス返す
+    sendResponse({});
+    return true;
   }
 );

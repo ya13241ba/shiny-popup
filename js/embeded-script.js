@@ -20,17 +20,17 @@ let shipopSupportSkillInfo = new ShipopSupportSkillInfo();
 let shipopSupportIdolInfo = new ShipopSupportIdolInfo();
 let shipopEventPageInfo = new ShipopEventInfo();
 let saveEmitFunc = new Function();
-let savePrimJsp = window.tw0mmestheetfk;
+let savePrimJsp = window.vewvf1ceeelcwa;
 // content load
 window.saveAryNFunc = new Array();
-window.tw0mmestheetfk = function (f, n, d) {
+window.vewvf1ceeelcwa = function (f, n, d) {
     var saveNFunc = null;
     var saveNFuncRet = null;
     var saveNFuncLOCALE = null;
     var saveNFuncLOCALT = null;
     var saveNFuncLOCALN = null;
     let nindex = -1;
-    if (n && f[0] == 0) {
+    if (n && (f[0] == 0 || f[0] == 51)) {
         // 引数nに設定された関数群の１番目を取得する
         nindex = Number.parseInt(Object.keys(n)[0]);
     }

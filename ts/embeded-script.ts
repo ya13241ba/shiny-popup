@@ -24,11 +24,11 @@ let shipopSupportIdolInfo   = new ShipopSupportIdolInfo();
 let shipopEventPageInfo     = new ShipopEventInfo()
 
 let saveEmitFunc : Function = new Function();
-let savePrimJsp  : Function = window.tw0mmestheetfk;
+let savePrimJsp  : Function = window.vewvf1ceeelcwa;
 
 // content load
 window.saveAryNFunc = new Array();
-window.tw0mmestheetfk = function(f:any, n:any, d:any) {
+window.vewvf1ceeelcwa = function(f:any, n:any, d:any) {
 
   var saveNFunc      :any = null;
   var saveNFuncRet   :any = null;
@@ -37,7 +37,7 @@ window.tw0mmestheetfk = function(f:any, n:any, d:any) {
   var saveNFuncLOCALN:any = null;
 
   let nindex : number = -1;
-  if ( n && f[0] == 0 ) {
+  if ( n && ( f[0] == 0 || f[0] == 51 ) ) {
     // 引数nに設定された関数群の１番目を取得する
     nindex = Number.parseInt( Object.keys( n )[0] );
   }
