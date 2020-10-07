@@ -17,14 +17,18 @@
    }
   ],
   "background": {
-    "scripts": ["js/shipop-bg.js"],
+    "scripts": [
+      "lib/jquery.min.js",
+      "lib/axios.min.js",
+      "js/shipop-bg.js",
+      "js/shilog-main.js"],
     "persistent": false
   },
   "web_accessible_resources": [
     "lib/jquery.min.js",
     "lib/moment.min.js",
-    "DataTables/datatables.min.css",
-    "DataTables/datatables.min.js",
+    "lib/axios.min.js",
+    "DataTables/*",
     "embeded-style.css",
     "shimng-idol.css",
     "html/shipop-content-base.html",
@@ -36,6 +40,7 @@
   ],
   "permissions": [
     "https://shinycolors.enza.fun/*",
+    "https://127.0.0.1:8000/*",
     "tabs"
   ]
 }

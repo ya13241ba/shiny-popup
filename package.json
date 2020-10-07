@@ -1,0 +1,29 @@
+{
+  "name": "shiny-popup",
+  "version": "1.0.0",
+  "description": "* shipop-main.js\r     * 以下のURLにマッチした場合に読み込まれる\r     https://shinycolors.enza.fun/*\r     * embeded-XXX.jsを上記ページに埋め込む",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/jquery": "^3.5.2",
+    "@types/moment": "^2.13.0",
+    "axios": "^0.20.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ya13241ba/shiny-popup.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ya13241ba/shiny-popup/issues"
+  },
+  "homepage": "https://github.com/ya13241ba/shiny-popup#readme"
+}
