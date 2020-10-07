@@ -1,3 +1,15 @@
+a#button {
+	display       : inline-block;
+	border-radius : 5%;          /* 角丸       */
+/*	font-size     : 10pt;         文字サイズ */
+	text-align    : center;      /* 文字位置   */
+	cursor        : pointer;     /* カーソル   */
+	padding       : 20px 20px;   /* 余白       */
+	background    : #ffffff;     /* 背景色     */
+	color         : #000000;     /* 文字色     */
+	line-height   : 1em;         /* 1行の高さ  */
+	border        : 2px solid #ffffff88;    /* 枠の指定 */
+}
 
 div#shipop-out {
 	/* overflow-y: hidden; */
