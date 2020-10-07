@@ -1,3 +1,4 @@
+import type axios from 'axios';
 
 var elementList = {};
 var pageLoadCompleted = false;
@@ -54,6 +55,33 @@ $( document ).ready( function() {
   elementList["shipop-ploginfo-table"]      = $("#shipop-ploginfo-table");
   elementList["shipop-plogdetail-table"]    = $("#shipop-plogdetail-table");
   elementList["shipop-plogdetail-idolname"] = $("#shipop-plogdetail-idolname");
+
+  const axiosShipop = axios.create({
+    baseURL:"http://127.0.0.1:8000", // バックエンドB のURL:port を指定する
+    headers:{
+      'Access-Control-Allow-Origin':"*",
+    }
+  });
+
+  let idolId = "28656411";
+  let endpointURL = "/logger/get-raw-log";
+
+  // GET PRODUCE LOG
+  let queryURL = "collectname=log_produce_result&idol=" + idolId;
+  axiosShipop.get( endpointURL + "?" + queryURL ).then( (response) => {
+    const logResult = response.data;
+    console.log("Success : " + endpointURL + "?" + queryURL + "=>" + (typeof logResult) );
+    console.log(logResult);
+  })
+
+  // GET EVENT LOG
+  queryURL = "collectname=log_event_result&idol=" + idolId;
+  axiosShipop.get( endpointURL + "?" + queryURL ).then( (response) => {
+    const logResult = response.data;
+    console.log("Success : " + endpointURL + "?" + queryURL + "=>" + (typeof logResult) );
+    console.log(logResult);
+  })
+
 
   shipopPLogDetail = elementList["shipop-ploginfo-table"].DataTable({
       // スクロールバーの設定はあってもなくても大丈夫です。
@@ -112,18 +140,18 @@ $( document ).ready( function() {
     }
   });
 
-  // プロデュースログの一覧取得
-  var LSKeyNames = []
-  for (var i = 0; i < localStorage.length; i++) {
-    if ( localStorage.key( i ).substr( 0, 5 ) == "plog_" ) {
-      LSKeyNames.push( localStorage.key( i ) );
-    }
-  }
+  // // プロデュースログの一覧取得
+  // var LSKeyNames = []
+  // for (var i = 0; i < localStorage.length; i++) {
+  //   if ( localStorage.key( i ).substr( 0, 5 ) == "plog_" ) {
+  //     LSKeyNames.push( localStorage.key( i ) );
+  //   }
+  // }
 
-  var LSProduceLog = JSON.parse( localStorage.getItem( LSKeyNames[ 0 ] ) );
-  if ( LSProduceLog ) {
-    shipopLoadProduceLog( LSProduceLog );
-  }
+  // var LSProduceLog = JSON.parse( localStorage.getItem( LSKeyNames[ 0 ] ) );
+  // if ( LSProduceLog ) {
+  //   shipopLoadProduceLog( LSProduceLog );
+  // }
 
   pageLoadCompleted = true;
 });

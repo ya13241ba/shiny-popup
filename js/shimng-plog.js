@@ -1,4 +1,3 @@
-"use strict";
 var elementList = {};
 var pageLoadCompleted = false;
 var shipopPLogDetail = null;
@@ -50,6 +49,16 @@ $(document).ready(function () {
     elementList["shipop-ploginfo-table"] = $("#shipop-ploginfo-table");
     elementList["shipop-plogdetail-table"] = $("#shipop-plogdetail-table");
     elementList["shipop-plogdetail-idolname"] = $("#shipop-plogdetail-idolname");
+    const axiosShipop = axios.create({
+        baseURL: "http://127.0.0.1:8000",
+    });
+    let endpointURL = "/logger/get-raw-log";
+    let queryURL = "collectname=log_produce_result&idol=28656411&desc=1";
+    axiosShipop.get(endpointURL + "?" + queryURL).then((response) => {
+        const produceResult = response.data;
+        console.log("Success : " + endpointURL + "?" + queryURL + "=>" + (typeof produceResult));
+        console.log(produceResult);
+    });
     shipopPLogDetail = elementList["shipop-ploginfo-table"].DataTable({
         // スクロールバーの設定はあってもなくても大丈夫です。
         scrollX: true,
@@ -100,16 +109,16 @@ $(document).ready(function () {
             $(row).css("background-color", shipopProduceLogColor(data[2]));
         }
     });
-    // プロデュースログの一覧取得
-    var LSKeyNames = [];
-    for (var i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i).substr(0, 5) == "plog_") {
-            LSKeyNames.push(localStorage.key(i));
-        }
-    }
-    var LSProduceLog = JSON.parse(localStorage.getItem(LSKeyNames[0]));
-    if (LSProduceLog) {
-        shipopLoadProduceLog(LSProduceLog);
-    }
+    // // プロデュースログの一覧取得
+    // var LSKeyNames = []
+    // for (var i = 0; i < localStorage.length; i++) {
+    //   if ( localStorage.key( i ).substr( 0, 5 ) == "plog_" ) {
+    //     LSKeyNames.push( localStorage.key( i ) );
+    //   }
+    // }
+    // var LSProduceLog = JSON.parse( localStorage.getItem( LSKeyNames[ 0 ] ) );
+    // if ( LSProduceLog ) {
+    //   shipopLoadProduceLog( LSProduceLog );
+    // }
     pageLoadCompleted = true;
 });
